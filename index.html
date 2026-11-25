@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ukoo wa Wambaga — Mti wa Familia</title>
+
+<!-- PWA Support -->
+<meta name="application-name" content="Wambaga">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wambaga">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#110900">
+<meta name="description" content="Mti wa Familia wa Ukoo wa Wambaga — Asmara hadi Usangi, vizazi 14, watu 937+">
+
+<!-- PWA Icons (using SVG as data URL) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23110900'/%3E%3Ccircle cx='256' cy='256' r='240' stroke='%23C9922A' stroke-width='6' fill='none'/%3E%3Cline x1='256' y1='380' x2='256' y2='280' stroke='%23C9922A' stroke-width='14'/%3E%3Cpath d='M256 280 Q186 246 150 196' stroke='%23C9922A' stroke-width='10' fill='none'/%3E%3Cpath d='M256 280 Q326 246 362 196' stroke='%23C9922A' stroke-width='10' fill='none'/%3E%3Cpath d='M256 310 Q256 260 256 200' stroke='%23C9922A' stroke-width='12' fill='none'/%3E%3Ccircle cx='150' cy='180' r='28' fill='%23C9922A' opacity='0.7'/%3E%3Ccircle cx='362' cy='180' r='28' fill='%23C9922A' opacity='0.7'/%3E%3Ccircle cx='256' cy='192' r='34' fill='%23C9922A' opacity='0.8'/%3E%3Ctext x='256' y='460' font-family='serif' font-size='52' fill='%23C9922A' text-anchor='middle' letter-spacing='6'%3EWAMBAGA%3C/text%3E%3C/svg%3E">
+
+<!-- PWA Manifest (inline) -->
+<script>
+const manifestData = {
+  name: "Ukoo wa Wambaga",
+  short_name: "Wambaga",
+  description: "Mti wa Familia wa Ukoo wa Wambaga",
+  start_url: "/",
+  display: "standalone",
+  background_color: "#110900",
+  theme_color: "#110900",
+  orientation: "portrait-primary",
+  icons: [
+    {
+      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23110900'/%3E%3Ccircle cx='256' cy='256' r='240' stroke='%23C9922A' stroke-width='6' fill='none'/%3E%3Ccircle cx='256' cy='192' r='34' fill='%23C9922A' opacity='0.8'/%3E%3Ctext x='256' y='460' font-family='serif' font-size='52' fill='%23C9922A' text-anchor='middle'%3EWAMBAGA%3C/text%3E%3C/svg%3E",
+      sizes: "512x512",
+      type: "image/svg+xml",
+      purpose: "any maskable"
+    }
+  ]
+};
+const blob = new Blob([JSON.stringify(manifestData)], {type:'application/json'});
+const manifestUrl = URL.createObjectURL(blob);
+const link = document.createElement('link');
+link.rel = 'manifest';
+link.href = manifestUrl;
+document.currentScript.parentNode.appendChild(link);
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#B8860B; --gold-l:#D4A520; --gold-p:#F7F0DC;
+  --bg:#F7F7F4; --bg2:#F0F0EB; --bg3:#E8E8E2;
+  --panel:#FFFFFF; --panel2:#F4F4F0;
+  --cream:#1C1C1A; --cream2:#4A4A45; --cream3:rgba(28,28,26,0.45);
+  --border:rgba(184,134,11,0.18); --border2:rgba(184,134,11,0.35);
+  --red:#C0392B; --green:#2E7D52;
+  --r:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--cream);overflow-x:hidden;min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:56px;
+  background:rgba(255,255,255,0.97);box-shadow:0 1px 12px rgba(0,0,0,0.06);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:0;
+  backdrop-filter:blur(8px);
+}
+.tb-logo{
+  display:flex;align-items:center;gap:10px;
+  padding:0 20px;border-right:1px solid var(--border);
+  height:100%;min-width:220px;
+}
+.tb-logo svg{width:28px;height:28px;flex-shrink:0}
+.tb-logo-text{font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold);letter-spacing:.1em}
+.tb-logo-sub{font-size:.6rem;color:rgba(28,28,26,0.45);letter-spacing:.15em;text-transform:uppercase}
+.tb-nav{display:flex;height:100%;margin-left:auto}
+.tb-nav a{
+  display:flex;align-items:center;gap:6px;
+  padding:0 16px;height:100%;
+  font-size:.72rem;letter-spacing:.08em;
+  color:var(--cream2);text-decoration:none;
+  border-left:1px solid var(--border);
+  transition:color .2s,background .2s;
+  cursor:pointer;font-weight:500;
+}
+.tb-nav a:hover,.tb-nav a.active{color:var(--gold);background:rgba(184,134,11,0.06)}
+.tb-search{
+  display:flex;align-items:center;gap:8px;
+  padding:0 16px;border-left:1px solid var(--border);height:100%;
+}
+.tb-search input{
+  background:var(--bg2);border:1px solid var(--border);
+  color:var(--cream);padding:6px 12px;font-size:.75rem;
+  font-family:'Raleway',sans-serif;outline:none;width:180px;
+  transition:border .2s,width .3s;
+}
+.tb-search input:focus{border-color:var(--gold-l);width:240px}
+.tb-search input::placeholder{color:rgba(28,28,26,0.35)}
+.search-clear{background:none;border:none;color:var(--cream3);cursor:pointer;font-size:1rem;padding:2px 4px}
+
+/* ── VIEWS ── */
+#app{padding-top:56px;min-height:100vh}
+.view{display:none}
+.view.active{display:block}
+
+/* ── HOME / HERO ── */
+.hero{
+  min-height:calc(100vh - 56px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:3rem 2rem;
+  background:linear-gradient(160deg,var(--panel) 0%,var(--bg2) 60%,var(--gold-p) 100%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 80%,rgba(184,134,11,.08) 0%,transparent 50%),
+             radial-gradient(circle at 80% 20%,rgba(184,134,11,.05) 0%,transparent 50%);
+}
+.hero-emblem{width:90px;height:90px;margin-bottom:2.5rem;animation:float 6s ease-in-out infinite;position:relative;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-pre{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--gold-l);letter-spacing:.35em;text-transform:uppercase;margin-bottom:.8rem;opacity:.75;position:relative;z-index:1}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(3rem,9vw,6rem);font-weight:700;color:#1C1C1A;letter-spacing:.06em;line-height:1;position:relative;z-index:1}
+.hero-sub{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.5vw,1.4rem);color:#4A4A45;font-weight:400;letter-spacing:.15em;margin:.5rem 0 1.5rem;position:relative;z-index:1}
+.hero-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:rgba(28,28,26,0.55);max-width:520px;line-height:1.9;margin-bottom:3rem;position:relative;z-index:1}
+.hero-stats{display:flex;gap:3.5rem;margin-bottom:3.5rem;position:relative;z-index:1}
+.stat-n{font-family:'Cinzel',serif;font-size:2.4rem;color:var(--gold);display:block}
+.stat-l{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,28,26,0.45)}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+.btn{font-family:'Raleway',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 2.2rem;border:none;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none}
+.btn-g{background:var(--gold);color:#fff}
+.btn-g:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,146,42,.3)}
+.btn-o{background:transparent;color:var(--gold);border:1px solid var(--border2)}
+.btn-o:hover{background:rgba(201,146,42,.07);border-color:var(--gold)}
+.btn-sm{padding:.55rem 1.4rem;font-size:.62rem}
+
+/* ── TREE VIEW ── */
+#view-tree{background:var(--bg);min-height:100%}
+.tree-header{
+  padding:.6rem 1rem;border-bottom:1px solid var(--border);
+  background:var(--panel);
+  display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  overflow:visible;
+}
+.tree-header-left h2{font-family:'Cinzel',serif;font-size:1.3rem;color:#1C1C1A;font-weight:600}
+.tree-header-left p{font-size:.7rem;color:#4A4A45;letter-spacing:.08em;margin-top:.3rem}
+.branch-tabs{display:flex;gap:5px;flex-wrap:wrap;width:100%;}
+.btab{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--panel2);color:#4A4A45;font-family:'Raleway',sans-serif;white-space:nowrap;flex-shrink:0}
+.btab:hover{border-color:var(--gold);color:var(--gold)}
+.btab.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+
+/* Canvas wrapper */
+/* Mini-map */
+
+/* Focus mode overlay buttons */
+
+.tree-canvas-wrap{position:relative;overflow:auto;background:var(--bg);width:100%;height:calc(100vh - 180px);touch-action:pan-x pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+#tree-svg{display:block;cursor:grab}
+#tree-svg.dragging{cursor:grabbing}
+
+/* SVG nodes */
+.node-group{cursor:pointer}
+.node-group .node-circle{transition:filter .2s}
+.node-group:hover .node-circle{filter:brightness(1.05) drop-shadow(0 0 10px rgba(184,134,11,.5))}
+.node-group .node-name{pointer-events:none;font-family:'Raleway',sans-serif;font-size:10px;fill:#1C1C1A;font-weight:600}
+.node-group .node-gen-label{pointer-events:none;font-family:'Raleway',sans-serif;font-size:8px;fill:#B8860B;letter-spacing:.05em;font-weight:600}
+
+/* ── PERSON DETAIL PANEL ── */
+.detail-panel{
+  position:fixed;right:0;top:56px;bottom:0;width:380px;
+  background:var(--panel);border-left:1px solid var(--border);
+  z-index:150;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.detail-panel.open{transform:translateX(0)}
+.dp-header{
+  padding:1.5rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;justify-content:space-between;
+}
+.dp-avatar{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-p),var(--bg2));
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;flex-shrink:0;overflow:hidden;
+  cursor:pointer;position:relative;
+}
+.dp-avatar:hover::after{
+  content:'✏️';position:absolute;inset:0;background:rgba(0,0,0,0.5);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+  border-radius:50%;
+}
+.dp-name{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--ink);font-weight:600;margin-bottom:.25rem}
+.dp-gen{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.dp-branch{font-size:.68rem;color:var(--ink3)}
+.dp-close{background:none;border:none;color:var(--cream3);cursor:pointer;font-size:1.2rem;padding:.3rem;margin-top:-.2rem;transition:color .2s}
+.dp-close:hover{color:var(--gold)}
+.dp-body{flex:1;overflow-y:auto;padding:1.5rem}
+.dp-section{margin-bottom:1.5rem}
+.dp-section-title{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,146,42,.5);border-bottom:1px solid var(--border);padding-bottom:.4rem;margin-bottom:.8rem}
+.dp-info-row{display:flex;gap:.8rem;margin-bottom:.5rem;align-items:flex-start}
+.dp-info-key{font-size:.68rem;letter-spacing:.05em;color:var(--cream3);min-width:80px;padding-top:.1rem}
+.dp-info-val{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--cream);flex:1;line-height:1.4}
+.dp-children-list{display:flex;flex-direction:column;gap:.3rem}
+.dp-child{
+  padding:.5rem .8rem;background:var(--panel2);
+  border:1px solid var(--border);cursor:pointer;
+  font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--cream2);
+  transition:border-color .2s,color .2s;
+}
+.dp-child:hover{border-color:var(--gold);color:var(--gold-l)}
+.dp-child-num{font-size:.6rem;color:rgba(201,146,42,.5);margin-right:.4rem}
+.dp-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--cream3);line-height:1.7;background:rgba(201,146,42,.04);padding:.8rem;border-left:2px solid var(--gold)}
+.dp-photo-upload{
+  border:1px dashed var(--border2);padding:1.2rem;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.dp-photo-upload:hover{border-color:var(--gold);background:rgba(201,146,42,.04)}
+.dp-photo-upload-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,146,42,.5);display:block;margin-top:.4rem}
+
+/* ── SEARCH RESULTS PANEL ── */
+#search-results{
+  position:fixed;top:56px;left:0;right:0;bottom:0;z-index:160;
+  background:rgba(8,5,0,.97);overflow-y:auto;display:none;padding:2rem;
+}
+#search-results.open{display:block}
+.sr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.sr-title{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--cream);font-weight:400}
+.sr-count{font-size:.7rem;color:var(--cream3);letter-spacing:.1em}
+.sr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.sr-card{
+  background:var(--panel);border:1px solid var(--border);padding:1.2rem;
+  cursor:pointer;transition:border-color .2s,background .2s;
+}
+.sr-card:hover{border-color:var(--gold);background:var(--panel2)}
+.sr-card-name{font-family:'Cinzel',serif;font-size:.95rem;color:var(--gold-l);margin-bottom:.3rem}
+.sr-card-gen{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:.4rem}
+.sr-card-branch{font-size:.75rem;color:var(--cream3)}
+.sr-card-parents{font-size:.7rem;color:rgba(250,244,232,.4);margin-top:.3rem;font-style:italic}
+
+/* ── HISTORY VIEW ── */
+#view-history{padding:3rem 2rem;max-width:900px;margin:0 auto}
+.history-section{margin-bottom:4rem}
+.hs-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;display:flex;align-items:center;gap:1rem}
+.hs-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+.hs-title{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--cream);font-weight:400;margin-bottom:.8rem}
+.hs-body{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--cream3);line-height:1.9}
+.timeline-item{position:relative;padding:0 0 2.5rem 2rem;border-left:1px solid rgba(201,146,42,.25)}
+.timeline-item::before{content:'';position:absolute;left:-4px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px rgba(201,146,42,.5)}
+.tl-year{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.2em;margin-bottom:.35rem}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--cream);font-weight:600;margin-bottom:.35rem}
+.tl-desc{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--cream3);line-height:1.7}
+
+/* ── PROVERBS VIEW ── */
+#view-proverbs{padding:3rem 2rem;max-width:900px;margin:0 auto}
+.proverb-card{
+  border:1px solid var(--border);padding:2rem;margin-bottom:1rem;
+  background:var(--panel);transition:border-color .2s;
+}
+.proverb-card:hover{border-color:var(--border2)}
+.prov-kipare{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold-l);margin-bottom:.6rem}
+.prov-sw{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--cream2);margin-bottom:.5rem}
+.prov-meaning{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--cream3);line-height:1.7;border-top:1px solid var(--border);padding-top:.6rem;margin-top:.5rem}
+.prov-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,146,42,.4)}
+
+/* ── GALLERY VIEW ── */
+#view-gallery.active{padding:1rem;display:block}
+#view-gallery.active #lounge-feed{display:flex;flex-direction:column}
+#view-gallery:not(.active) #lounge-feed{display:none!important}
+#view-gallery:not(.active) #lounge-compose{display:none!important}
+.lounge-tab{background:none;border:none;border-bottom:2px solid transparent;border-radius:0;padding:.4rem .75rem;color:var(--cream3);font-size:.78rem;cursor:pointer;white-space:nowrap;transition:all .2s;font-weight:500}
+.lounge-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.lounge-tab:hover{color:var(--cream)}
+.lounge-tabs-bar{display:flex;gap:0;border-bottom:1px solid var(--border);margin:0 -1rem .75rem;padding:0 1rem}
+.lounge-card{background:var(--panel);border-radius:14px;margin-bottom:.85rem;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.2);border:1px solid var(--border)}
+.lounge-card-header{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem .4rem}
+.lounge-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;overflow:hidden;font-weight:700;color:#fff}
+.lounge-user{font-weight:600;font-size:.9rem;color:var(--cream);line-height:1.2}
+.lounge-branch{font-size:.68rem;color:var(--gold);letter-spacing:.04em;margin-top:1px}
+.lounge-time{font-size:.65rem;color:var(--cream3);margin-left:auto;white-space:nowrap}
+.lounge-content{padding:.2rem 1rem .7rem;font-size:.95rem;color:var(--cream2);line-height:1.65;white-space:pre-wrap;word-break:break-word}
+.lounge-photo{width:100%;max-height:380px;object-fit:cover;display:block;cursor:zoom-in}
+.lounge-actions{display:flex;padding:.1rem .4rem;gap:.2rem}
+.lounge-action-btn{flex:1;background:none;border:none;padding:.5rem .4rem;color:var(--cream3);cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;gap:.35rem;border-radius:8px;transition:all .15s;font-weight:500}
+.lounge-action-btn:hover,.lounge-action-btn.reacted{background:rgba(201,146,42,.08);color:var(--gold)}
+.lounge-pinned{border:1px solid rgba(201,146,42,.25)}
+.lounge-reaction-bar{padding:.1rem 1rem .5rem;font-size:.82rem;color:var(--cream3);display:flex;gap:.5rem;flex-wrap:wrap}
+.comment-item{display:flex;gap:.6rem;padding:.5rem 0}
+.comment-bubble{background:var(--panel2);border-radius:12px 12px 12px 4px;padding:.5rem .75rem;flex:1}
+.comment-user{font-size:.75rem;font-weight:700;color:var(--gold);margin-bottom:.2rem}
+.comment-text{font-size:.88rem;color:var(--cream2);line-height:1.5}
+.comment-time{font-size:.62rem;color:var(--cream3);margin-top:.2rem}
+.comment-reply-btn{font-size:.68rem;color:var(--cream3);cursor:pointer;margin-top:.2rem;display:inline-block}
+.comment-reply-btn:hover{color:var(--gold)}
+.comment-reply{margin-left:2.8rem;margin-top:.3rem}
+.comment-reply .comment-bubble{background:rgba(201,146,42,.06);border-radius:4px 12px 12px 4px;border-left:2px solid rgba(201,146,42,.3)}
+.ai-fab{position:fixed;bottom:5rem;left:1.2rem;width:48px;height:48px;border-radius:50%;background:var(--panel);border:1.5px solid var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,146,42,.25);z-index:999;transition:all .2s}
+.ai-fab:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(201,146,42,.4);background:rgba(201,146,42,.1)}
+.ai-drawer{position:fixed;bottom:0;left:0;right:0;height:70vh;background:var(--bg);border-top:1px solid var(--border);border-radius:16px 16px 0 0;z-index:10000;transform:translateY(100%);transition:transform .3s ease;display:flex;flex-direction:column}
+.ai-drawer.open{transform:translateY(0)}
+.ai-drawer-header{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.ai-messages{flex:1;overflow-y:auto;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.75rem}
+.ai-msg{max-width:85%;padding:.65rem .9rem;border-radius:12px;font-size:.88rem;line-height:1.5}
+.ai-msg.user{background:var(--gold);color:#fff;align-self:flex-end;border-radius:12px 12px 4px 12px}
+.ai-msg.bot{background:var(--panel);color:var(--cream2);align-self:flex-start;border-radius:12px 12px 12px 4px;border:1px solid var(--border)}
+.ai-input-area{padding:.75rem 1rem;border-top:1px solid var(--border);display:flex;gap:.5rem}
+.gallery-header{margin-bottom:2rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2px}
+.gallery-slot{
+  aspect-ratio:1;background:var(--panel);border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .2s,background .2s;gap:.5rem;position:relative;
+}
+.gallery-slot:hover{border-color:var(--border2);background:var(--panel2)}
+.gs-icon{font-size:1.8rem;opacity:.35}
+.gs-label{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(201,146,42,.4)}
+.gs-add{border-style:dashed;border-color:var(--border2)}
+.gs-add:hover{border-color:var(--gold)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(201,146,42,.25);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(201,146,42,.45)}
+
+/* ── LOADING ── */
+.loading-screen{
+  position:fixed;inset:0;z-index:9999;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;
+}
+.loading-spinner{width:50px;height:50px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold);letter-spacing:.2em}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--panel2);border:1px solid var(--gold);
+  padding:.75rem 1.5rem;font-size:.75rem;letter-spacing:.1em;color:var(--gold-l);
+  z-index:9000;transition:transform .3s;pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{display:flex;align-items:center;gap:.4rem;padding:.6rem 2rem;background:rgba(201,146,42,.04);border-bottom:1px solid var(--border);font-size:.65rem;letter-spacing:.1em;flex-wrap:wrap}
+.bc-item{color:var(--cream3);cursor:pointer;transition:color .2s}
+.bc-item:hover{color:var(--gold)}
+.bc-item.current{color:var(--gold-l)}
+.bc-sep{color:rgba(201,146,42,.3)}
+
+.tribes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem;margin-bottom:1rem}
+.tribe-card{background:var(--panel);border:1px solid var(--border);padding:1rem;transition:border-color .2s}
+.tribe-card:hover{border-color:var(--border2)}
+.tribe-name{font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold-l);margin-bottom:.2rem}
+.tribe-now{font-size:.75rem;color:var(--cream2);margin-bottom:.15rem}
+.tribe-loc{font-size:.65rem;color:var(--cream3);font-style:italic}
+.locations-map-wrap{margin:.5rem 0 1rem;overflow:hidden}
+
+
+/* ── AUTH & SUPABASE ── */
+.auth-bar{
+  position:fixed;top:0;right:0;z-index:300;
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;pointer-events:none;
+}
+.auth-btn{
+  font-family:'Raleway',sans-serif;font-size:.62rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:.4rem 1rem;border:1px solid var(--border2);
+  background:rgba(17,9,0,0.9);color:var(--gold-l);cursor:pointer;
+  transition:all .2s;pointer-events:all;
+  backdrop-filter:blur(8px);
+}
+.auth-btn:hover{background:rgba(201,146,42,0.1);border-color:var(--gold)}
+.auth-btn.logged-in{background:rgba(90,120,60,0.2);border-color:rgba(90,150,90,0.5);color:#8fc88f}
+.auth-overlay{
+  position:fixed;inset:0;z-index:5000;
+  background:rgba(8,4,0,0.92);
+  display:none;align-items:center;justify-content:center;
+}
+.auth-overlay.open{display:flex}
+.auth-box{
+  background:var(--panel);border:1px solid var(--border2);
+  padding:2.5rem;width:min(420px,90vw);
+  animation:fadeUp .3s ease;
+}
+@keyframes fadeUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.auth-title{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--cream);margin-bottom:.4rem}
+.auth-sub{font-size:.72rem;color:var(--cream3);margin-bottom:1.8rem;letter-spacing:.05em}
+.auth-field{margin-bottom:1.2rem}
+.auth-field label{display:block;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.auth-field input{
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border2);
+  color:var(--cream);padding:.7rem 1rem;font-size:.85rem;
+  font-family:'Raleway',sans-serif;outline:none;
+  transition:border .2s;
+}
+.auth-field input:focus{border-color:var(--gold-l)}
+.auth-error{font-size:.72rem;color:#e87050;margin-bottom:1rem;min-height:1rem}
+.auth-actions{display:flex;gap:.8rem;justify-content:flex-end;margin-top:1.5rem}
+.auth-switch{font-size:.7rem;color:var(--cream3);margin-top:1rem;text-align:center}
+.auth-switch a{color:var(--gold);cursor:pointer;text-decoration:underline}
+
+/* ── ADD PERSON MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:4000;
+  background:rgba(8,4,0,0.88);
+  display:none;align-items:center;justify-content:center;
+  padding:1rem;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--panel);border:1px solid var(--border2);
+  padding:2rem;width:min(500px,96vw);
+  max-height:90vh;overflow-y:auto;
+  animation:fadeUp .25s ease;
+}
+.modal-title{font-family:'Cinzel',serif;font-size:1.15rem;color:var(--cream);margin-bottom:.3rem}
+.modal-sub{font-size:.7rem;color:var(--cream3);margin-bottom:1.5rem}
+.modal-field{margin-bottom:1rem}
+.modal-field label{display:block;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.modal-field input,.modal-field select,.modal-field textarea{
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  color:var(--cream);padding:.6rem .9rem;font-size:.82rem;
+  font-family:'Raleway',sans-serif;outline:none;transition:border .2s;
+}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{border-color:var(--gold-l)}
+.modal-field select option{background:var(--bg2);color:var(--cream)}
+.modal-field textarea{resize:vertical;min-height:70px}
+.modal-actions{display:flex;gap:.8rem;justify-content:flex-end;margin-top:1.5rem;flex-wrap:wrap}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* ── PHOTO UPLOAD IN PANEL ── */
+.dp-photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:.8rem}
+.dp-photo-img{
+  aspect-ratio:1;object-fit:cover;width:100%;
+  border:1px solid var(--border);cursor:pointer;
+}
+.dp-photo-add{
+  aspect-ratio:1;border:1px dashed var(--border2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;gap:4px;transition:border-color .2s,background .2s;
+}
+.dp-photo-add:hover{border-color:var(--gold);background:rgba(201,146,42,0.04)}
+.dp-photo-add-icon{font-size:1.4rem;opacity:.5}
+.dp-photo-add-label{font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(201,146,42,.4)}
+
+/* ── FAB (Floating Add Button) ── */
+.fab{
+  position:fixed;bottom:2rem;right:2rem;z-index:400;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--gold);color:#fff;border:none;
+  font-size:1.6rem;cursor:pointer;
+  display:none;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(201,146,42,.35);
+  transition:transform .2s,box-shadow .2s;
+}
+.fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,146,42,.5)}
+.fab.visible{display:flex}
+
+/* ── ADMIN DELETE BTN ── */
+.dp-delete-btn{
+  width:100%;margin-top:.8rem;
+  padding:.55rem;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;
+  background:rgba(180,50,30,0.1);border:1px solid rgba(180,50,30,0.35);
+  color:rgba(220,100,80,0.8);cursor:pointer;font-family:'Raleway',sans-serif;
+  transition:all .2s;
+}
+.dp-delete-btn:hover{background:rgba(180,50,30,0.2);border-color:rgba(220,100,80,.6);color:#e87050}
+
+/* ── LIGHTBOX ── */
+.lightbox{
+  position:fixed;inset:0;z-index:6000;background:rgba(0,0,0,0.92);
+  display:none;align-items:center;justify-content:center;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none}
+
+/* ── GALLERY REAL IMAGES ── */
+.gal-img{
+  aspect-ratio:1;object-fit:cover;width:100%;cursor:pointer;
+  border:1px solid var(--border);transition:opacity .2s;
+}
+.gal-img:hover{opacity:.85}
+.gal-item-label{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(201,146,42,.5);margin-top:4px;text-align:center}
+
+/* ── MOBILE ── */
+
+/* Hamburger button — hidden on desktop */
+.tb-hamburger{
+  display:none;
+  background:none;border:none;color:var(--gold);
+  font-size:1.4rem;padding:0 16px;cursor:pointer;
+  height:56px;align-items:center;
+  border-left:1px solid var(--border);
+  flex-shrink:0;
+}
+
+/* Search row — always shown below topbar */
+.tb-search-row{
+  position:fixed;top:56px;left:0;right:0;z-index:199;
+  display:flex;align-items:center;gap:6px;
+  padding:5px 10px;
+  background:rgba(255,255,255,0.97);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 2px 8px rgba(0,0,0,0.06);
+  backdrop-filter:blur(8px);
+}
+.tb-search-row input{
+  flex:1;min-width:0;
+  background:var(--bg2);border:1px solid var(--border);
+  color:var(--cream);padding:7px 12px;font-size:.78rem;
+  font-family:'Raleway',sans-serif;outline:none;
+  transition:border .2s;border-radius:20px;
+}
+.tb-search-row input:focus{border-color:var(--gold-l);background:var(--panel);box-shadow:0 0 0 3px rgba(184,134,11,0.08)}
+.tb-search-row input::placeholder{color:rgba(28,28,26,0.4)}
+.tb-search-row .search-clear{background:none;border:none;color:rgba(28,28,26,0.45);cursor:pointer;font-size:1rem;padding:4px 6px;flex-shrink:0}
+
+/* Offset app and panels for the extra search row */
+#app{padding-top:88px}
+.detail-panel{top:88px!important;bottom:0}
+#search-results{top:88px!important}
+.tree-canvas-wrap{height:calc(100vh - 210px)!important}
+
+/* Mobile drawer nav */
+.mob-drawer{
+  position:fixed;inset:0;z-index:600;display:none;pointer-events:none;
+}
+.mob-drawer.open{display:block;pointer-events:all}
+.mob-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.72)}
+.mob-panel{
+  position:absolute;left:0;top:0;bottom:0;width:260px;
+  background:var(--panel);border-right:1px solid var(--border2);
+  display:flex;flex-direction:column;overflow-y:auto;
+  animation:slideInLeft .22s ease;
+}
+@keyframes slideInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+.mob-header{
+  padding:.9rem 1.1rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.mob-title{font-family:'Cinzel',serif;color:var(--gold);font-size:.9rem;letter-spacing:.1em}
+.mob-close-btn{background:none;border:none;color:var(--cream3);font-size:1.3rem;cursor:pointer;padding:2px 6px}
+.mob-nav-item{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.85rem 1.1rem;cursor:pointer;
+  font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cream2);border-left:3px solid transparent;
+  transition:all .15s;border-bottom:1px solid rgba(201,146,42,.05);
+}
+.mob-nav-item:hover,.mob-nav-item.mob-active{
+  color:var(--gold);background:rgba(201,146,42,.08);border-left-color:var(--gold);
+}
+.mob-nav-icon{font-size:.9rem;width:20px;text-align:center;flex-shrink:0}
+.mob-nav-footer{padding:1rem 1.1rem;border-top:1px solid var(--border);margin-top:auto;flex-shrink:0}
+
+/* Ancestor breadcrumb in person panel */
+.dp-ancestors{
+  display:flex;align-items:center;gap:3px;flex-wrap:wrap;
+  padding:.45rem 1rem;background:rgba(201,146,42,.04);
+  border-bottom:1px solid var(--border);font-size:.63rem;
+}
+.dp-anc-btn{
+  background:none;border:none;color:var(--gold-l);cursor:pointer;
+  font-family:'Raleway',sans-serif;font-size:.63rem;
+  padding:1px 3px;text-decoration:underline;
+  text-decoration-color:rgba(201,146,42,.3);
+}
+.dp-anc-btn:hover{color:var(--gold)}
+.dp-anc-sep{color:rgba(201,146,42,.3);font-size:.7rem}
+
+/* Edit person modal */
+.edit-overlay{
+  position:fixed;inset:0;z-index:700;
+  background:rgba(0,0,0,.8);
+  display:flex;align-items:center;justify-content:center;
+  padding:1rem;
+  opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.edit-overlay.open{opacity:1;pointer-events:all}
+.edit-box{
+  background:var(--panel);border:1px solid var(--border2);
+  padding:1.8rem;max-width:460px;width:100%;
+  max-height:90vh;overflow-y:auto;border-radius:2px;
+}
+.edit-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:1.2rem;letter-spacing:.06em}
+.edit-field{margin-bottom:.9rem}
+.edit-lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;display:block}
+.edit-inp{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+  color:var(--cream);padding:.5rem .8rem;font-size:.84rem;
+  font-family:'Raleway',sans-serif;outline:none;transition:border .2s;
+}
+.edit-inp:focus{border-color:var(--gold-l)}
+.edit-inp::placeholder{color:rgba(250,244,232,.22)}
+.edit-textarea{min-height:75px;resize:vertical}
+.edit-actions{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1.2rem;flex-wrap:wrap}
+.edit-err{color:#e07070;font-size:.76rem;margin-bottom:.4rem;display:none}
+
+/* Daudi Liana page cards */
+.liana-card{background:rgba(201,146,42,.05);border:1px solid rgba(201,146,42,.15);padding:.9rem 1rem}
+.liana-label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.liana-text{font-size:.83rem;color:var(--cream2);line-height:1.65}
+.sib-card{padding:.9rem 1rem;background:rgba(201,146,42,.04);border:1px solid rgba(201,146,42,.1);margin-bottom:.6rem}
+.sib-name{font-family:'Cinzel',serif;font-size:.86rem;color:var(--cream);margin-bottom:.3rem}
+.sib-role{font-family:'Raleway',sans-serif;font-size:.68rem;color:var(--gold);font-weight:400}
+.sib-desc{font-size:.82rem;color:var(--cream2);line-height:1.6}
+
+@media(max-width:768px){
+  .tb-logo{min-width:unset}.tb-logo-sub{display:none}
+  /* Hide desktop nav links on mobile, show hamburger */
+  .tb-nav{display:none!important}
+  .tb-hamburger{display:flex}
+  /* Hide original desktop search (now using search-row) */
+  .tb-search{display:none}
+  .detail-panel{width:100%!important}
+  .tree-header{padding:.5rem .75rem;flex-wrap:wrap;gap:.3rem}
+  .branch-tabs{flex-wrap:wrap;width:100%;}
+  .btab{font-size:.58rem;padding:.28rem .7rem;}
+  .hero-stats{gap:1rem}
+  .hero-stats .stat-n{font-size:1.6rem}
+  .hero-title{font-size:clamp(1.8rem,8vw,3rem)}
+  .hero-btns{flex-direction:column;align-items:center}
+  .modal-row{grid-template-columns:1fr}
+  .modal-box,.auth-box{padding:1.4rem}
+  .fab{bottom:4.5rem;right:1rem}
+  .ai-fab{bottom:4.5rem}
+  #mob-bottom-nav{display:flex!important}
+  #view-home,#view-tree,#view-history,#view-daudi,#view-proverbs,#view-gallery{padding-bottom:4.5rem}
+}
+@media(min-width:769px){
+  #mob-bottom-nav{display:none!important}
+  /* On desktop, hide search-row (use original .tb-search) */
+  .tb-search-row{display:none}
+}
+
+/* ── MOBILE BOTTOM NAV ── */
+#mob-bottom-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:var(--panel);border-top:1px solid var(--border);
+  box-shadow:0 -2px 16px rgba(0,0,0,0.07);
+  z-index:500;height:56px;align-items:stretch;
+}
+.mob-bottom-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;cursor:pointer;color:var(--cream3);font-size:.6rem;letter-spacing:.04em;
+  transition:color .15s;padding:.4rem .2rem;background:none;border:none;position:relative;
+}
+.mob-bottom-item.active,.mob-bottom-item:hover{color:var(--gold)}
+.mob-bottom-icon{font-size:1.15rem;line-height:1}
+.mob-bottom-dot{position:absolute;top:6px;right:calc(50% - 12px);width:7px;height:7px;background:#4a9eff;border-radius:50%;display:none}
+
+/* ── BACK BUTTON ── */
+.back-btn{
+  font-family:'Raleway',sans-serif;font-size:.65rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  padding:.45rem 1rem;border:1px solid var(--border2);
+  background:rgba(201,146,42,0.08);color:var(--gold-l);cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.back-btn:hover{background:rgba(201,146,42,0.15);border-color:var(--gold);transform:translateX(-2px)}
+
+/* ── BREADCRUMB ── */
+.tree-breadcrumb{
+  padding:.45rem 1.5rem;background:rgba(201,146,42,0.04);
+  border-bottom:1px solid var(--border);font-size:.65rem;
+  letter-spacing:.08em;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;
+}
+.bc-home{color:var(--gold);cursor:pointer;opacity:.7;transition:opacity .2s}
+.bc-home:hover{opacity:1}
+.bc-sep{color:rgba(201,146,42,0.3);margin:0 .1rem}
+.bc-crumb{color:var(--cream3);cursor:pointer;transition:color .2s}
+.bc-crumb:hover{color:var(--gold-l)}
+.bc-crumb.current{color:var(--cream);cursor:default}
+
+/* ── MAP ── */
+.map-container{
+  border:1px solid var(--border);overflow:hidden;
+  background:#0D0800;
+}
+.hist-map{width:100%;display:block}
+
+/* ── MILA CARDS ── */
+.mila-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.mila-card{
+  border:1px solid var(--border);padding:1.2rem;background:var(--panel);
+  transition:border-color .2s;
+}
+.mila-card:hover{border-color:var(--border2)}
+.mila-num{
+  font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;
+  color:var(--gold);opacity:.6;margin-bottom:.3rem;
+}
+.mila-name{
+  font-family:'Cinzel',serif;font-size:1.05rem;color:var(--cream);
+  margin-bottom:.6rem;
+}
+.mila-desc{
+  font-family:'Cormorant Garamond',serif;font-size:.97rem;
+  color:var(--cream3);line-height:1.75;
+}
+
+/* ── MIRESHE ── */
+.mireshe-visual{margin-bottom:1.2rem}
+
+
+/* Legend */
+
+.tl-hint{font-size:.55rem;color:rgba(201,146,42,.35);letter-spacing:.06em;margin-top:.5rem;border-top:1px solid var(--border);padding-top:.4rem}
+
+/* ═══════════════════════════════════════════════════════════════
+   UI POLISH v2 — Utambulisho wa Kipare
+   Kanga-band signature · Pare mountains · refined depth & motion
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --gold-deep:#8A6508;
+  --shadow-1:0 1px 3px rgba(28,20,5,.06),0 4px 14px rgba(28,20,5,.05);
+  --shadow-2:0 2px 6px rgba(28,20,5,.08),0 10px 30px rgba(28,20,5,.09);
+  --shadow-gold:0 6px 24px rgba(184,134,11,.22);
+}
+
+/* Selection + scrollbars */
+::selection{background:rgba(184,134,11,.25);color:var(--cream)}
+*{scrollbar-width:thin;scrollbar-color:rgba(184,134,11,.35) transparent}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(184,134,11,.3);border-radius:8px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:rgba(184,134,11,.5)}
+
+/* ── SIGNATURE: Kanga band (mstari wa kanga/ushanga wa Kipare) ── */
+.topbar::after{
+  content:'';position:absolute;left:0;right:0;top:100%;height:5px;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='5' viewBox='0 0 20 5'%3E%3Cpath d='M0 5 L5 0 L10 5 Z' fill='%23B8860B' opacity='.55'/%3E%3Cpath d='M10 5 L15 0 L20 5 Z' fill='%23B8860B' opacity='.25'/%3E%3C/svg%3E");
+  background-repeat:repeat-x;background-size:20px 5px;
+  opacity:.9;
+}
+
+/* ── HERO: Milima ya Pare silhouette ── */
+.hero{isolation:isolate}
+.hero::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:26vh;min-height:150px;
+  pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 260' preserveAspectRatio='none'%3E%3Cpath d='M0 260 L0 190 Q80 150 160 168 Q240 120 330 145 Q420 80 520 118 Q600 60 700 105 Q790 70 880 120 Q960 95 1050 150 Q1130 125 1200 165 L1200 260 Z' fill='%23B8860B' opacity='.07'/%3E%3Cpath d='M0 260 L0 215 Q100 185 200 200 Q300 165 400 185 Q500 140 620 170 Q720 135 820 172 Q920 150 1020 190 Q1110 170 1200 200 L1200 260 Z' fill='%23B8860B' opacity='.10'/%3E%3C/svg%3E");
+  background-size:cover;background-position:bottom;
+}
+.hero > *{position:relative;z-index:1}
+.hero-emblem{filter:drop-shadow(0 8px 24px rgba(184,134,11,.18))}
+
+/* Hero entrance (respects reduced motion) */
+@media (prefers-reduced-motion: no-preference){
+  .hero-pre,.hero-title,.hero-sub,.hero-quote,.hero-stats,.hero-btns{
+    animation:heroUp .7s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .hero-title{animation-delay:.06s}.hero-sub{animation-delay:.12s}
+  .hero-quote{animation-delay:.18s}.hero-stats{animation-delay:.24s}.hero-btns{animation-delay:.3s}
+  @keyframes heroUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .view.active{animation:viewIn .3s ease both}
+  @keyframes viewIn{from{opacity:0}to{opacity:1}}
+}
+
+/* Stats: gold rule under numbers */
+.hero-stats .stat{position:relative;padding-top:.35rem}
+.hero-stats .stat::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:26px;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+
+/* ── BUTTONS: depth + press + focus ── */
+.btn{border-radius:3px}
+.btn-g{background:linear-gradient(180deg,var(--gold-l),var(--gold));box-shadow:var(--shadow-gold)}
+.btn-g:hover{background:linear-gradient(180deg,#E0B335,var(--gold-l))}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn:focus-visible,.btab:focus-visible,.lounge-action-btn:focus-visible{outline:2px solid var(--gold-l);outline-offset:2px}
+button{-webkit-tap-highlight-color:rgba(184,134,11,.15)}
+
+/* ── BRANCH TABS: pills ── */
+.btab{border-radius:999px;padding:.42rem 1.05rem}
+.btab.active{box-shadow:0 3px 12px rgba(184,134,11,.3)}
+
+/* ── CARDS: unified radius + layered shadow + lift ── */
+.proverb-card,.sr-card,.liana-card,.sib-card{border-radius:10px;box-shadow:var(--shadow-1);transition:box-shadow .25s,border-color .25s,transform .25s}
+.proverb-card:hover,.sr-card:hover{box-shadow:var(--shadow-2);transform:translateY(-2px)}
+.lounge-card{box-shadow:var(--shadow-1)}
+.lounge-card:hover{box-shadow:var(--shadow-2)}
+
+/* ── DETAIL PANEL: gold identity band + polish ── */
+.detail-panel{box-shadow:-12px 0 40px rgba(28,20,5,.12)}
+.dp-header{position:relative;background:linear-gradient(180deg,rgba(184,134,11,.05),transparent)}
+.dp-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='4' viewBox='0 0 16 4'%3E%3Cpath d='M0 4 L4 0 L8 4 Z' fill='%23B8860B' opacity='.5'/%3E%3Cpath d='M8 4 L12 0 L16 4 Z' fill='%23B8860B' opacity='.22'/%3E%3C/svg%3E");
+  background-repeat:repeat-x;background-size:16px 4px;
+}
+.dp-avatar{box-shadow:0 4px 16px rgba(184,134,11,.25);transition:transform .25s,box-shadow .25s}
+.dp-avatar:hover{transform:scale(1.04);box-shadow:0 6px 22px rgba(184,134,11,.35)}
+.dp-child{border-radius:7px;transition:border-color .2s,color .2s,transform .2s,background .2s}
+.dp-child:hover{transform:translateX(3px);background:rgba(184,134,11,.05)}
+.dp-note{border-radius:0 8px 8px 0}
+
+/* ── INPUTS ── */
+.tb-search input,.edit-inp,.auth-field input,.modal-box input,.modal-box select,.modal-box textarea{border-radius:7px}
+.tb-search input:focus{box-shadow:0 0 0 3px rgba(184,134,11,.12)}
+
+/* ── BACK BTN + BREADCRUMB ── */
+.back-btn{border-radius:999px}
+.tree-breadcrumb{backdrop-filter:blur(4px)}
+
+/* ── MOBILE BOTTOM NAV: active glow ── */
+.mob-bottom-item.active::before{
+  content:'';position:absolute;top:0;left:20%;right:20%;height:2.5px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);border-radius:0 0 4px 4px;
+}
+.mob-bottom-item.active .mob-bottom-icon{transform:translateY(-1px);transition:transform .2s}
+#mob-bottom-nav{backdrop-filter:blur(10px);background:rgba(255,255,255,.94)}
+
+/* ── FABs ── */
+.ai-fab,.fab{transition:transform .2s,box-shadow .2s}
+.ai-fab:active,.fab:active{transform:scale(.95)}
+
+/* ── MTU WA LEO card (injected by JS) ── */
+.mwl-card{
+  display:inline-flex;align-items:center;gap:.9rem;margin:0 0 2.2rem;
+  padding:.75rem 1.3rem .75rem .8rem;background:rgba(255,255,255,.75);
+  border:1px solid var(--border2);border-radius:999px;cursor:pointer;
+  box-shadow:var(--shadow-1);transition:box-shadow .25s,transform .25s,border-color .25s;
+  backdrop-filter:blur(6px);text-align:left;position:relative;z-index:1;
+}
+.mwl-card:hover{box-shadow:var(--shadow-2);transform:translateY(-2px);border-color:var(--gold)}
+.mwl-avatar{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;overflow:hidden;
+  background:linear-gradient(135deg,var(--gold-p),var(--bg2));
+  border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+}
+.mwl-eyebrow{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.mwl-name{font-family:'Cinzel',serif;font-size:.92rem;color:var(--cream);line-height:1.25}
+.mwl-meta{font-size:.64rem;color:var(--cream3);letter-spacing:.05em}
+.mwl-arrow{color:var(--gold);font-size:.9rem;margin-left:.2rem;transition:transform .2s}
+.mwl-card:hover .mwl-arrow{transform:translateX(3px)}
+
+/* ── SCROLL TO TOP ── */
+#scroll-top-btn{
+  position:fixed;bottom:5rem;right:1.2rem;width:42px;height:42px;border-radius:50%;
+  background:var(--panel);border:1.5px solid var(--border2);color:var(--gold);
+  cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1rem;
+  box-shadow:var(--shadow-1);z-index:400;transition:opacity .25s,transform .2s;
+}
+#scroll-top-btn:hover{border-color:var(--gold);box-shadow:var(--shadow-gold)}
+#scroll-top-btn:active{transform:scale(.94)}
+@media(max-width:768px){#scroll-top-btn{bottom:8.5rem;right:.9rem}}
+
+/* History map + sections */
+.hist-map{border-radius:12px;box-shadow:var(--shadow-2)}
+.hs-title{letter-spacing:.02em}
+
+/* Comment bubbles softer */
+.comment-bubble{box-shadow:0 1px 4px rgba(28,20,5,.05)}
+
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loading">
+  <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="48" stroke="rgba(201,146,42,0.2)" stroke-width="1"/>
+    <line x1="50" y1="75" x2="50" y2="55" stroke="#C9922A" stroke-width="2.5"/>
+    <path d="M50 55 Q35 48 28 38" stroke="#C9922A" stroke-width="2" fill="none"/>
+    <path d="M50 55 Q65 48 72 38" stroke="#C9922A" stroke-width="2" fill="none"/>
+    <path d="M50 62 Q50 52 50 40" stroke="#C9922A" stroke-width="2" fill="none"/>
+    <circle cx="28" cy="36" r="5" fill="rgba(201,146,42,0.25)" stroke="#C9922A" stroke-width="1.2"/>
+    <circle cx="72" cy="36" r="5" fill="rgba(201,146,42,0.25)" stroke="#C9922A" stroke-width="1.2"/>
+    <circle cx="50" cy="38" r="6" fill="rgba(201,146,42,0.3)" stroke="#C9922A" stroke-width="1.5"/>
+  </svg>
+  <div class="loading-text">Inapakia Historia ya Wambaga...</div>
+</div>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <!-- Global Back Button -->
+  <button id="global-back-btn" onclick="goBackView()" style="display:none;align-items:center;gap:.4rem;
+    height:100%;padding:0 14px;background:none;border:none;border-right:1px solid var(--border);
+    color:var(--cream3);cursor:pointer;font-family:'Raleway',sans-serif;font-size:.7rem;
+    letter-spacing:.08em;transition:color .2s,background .2s;flex-shrink:0">
+    ← <span class="back-label">Rudi</span>
+  </button>
+  <div class="tb-logo" onclick="showView('home')" style="cursor:pointer">
+    <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="48" stroke="rgba(201,146,42,0.3)" stroke-width="1"/><line x1="50" y1="75" x2="50" y2="55" stroke="#C9922A" stroke-width="2.5"/><path d="M50 55 Q35 48 28 38" stroke="#C9922A" stroke-width="1.8" fill="none"/><path d="M50 55 Q65 48 72 38" stroke="#C9922A" stroke-width="1.8" fill="none"/><path d="M50 62 Q50 52 50 40" stroke="#C9922A" stroke-width="2" fill="none"/><circle cx="28" cy="36" r="5" fill="rgba(201,146,42,0.25)" stroke="#C9922A" stroke-width="1"/><circle cx="72" cy="36" r="5" fill="rgba(201,146,42,0.25)" stroke="#C9922A" stroke-width="1"/><circle cx="50" cy="38" r="6" fill="rgba(201,146,42,0.3)" stroke="#C9922A" stroke-width="1.2"/></svg>
+    <div><div class="tb-logo-text">WAMBAGA</div><div class="tb-logo-sub">Mti wa Familia</div></div>
+  </div>
+  <div id="online-indicator" style="display:flex;align-items:center;gap:5px;padding:0 10px;font-size:.68rem;color:var(--cream3);border-right:1px solid var(--border);height:100%;flex-shrink:0">
+    <span style="width:7px;height:7px;border-radius:50%;background:#4caf50;display:inline-block;flex-shrink:0"></span>
+    <span id="online-count">1</span> mtandaoni
+  </div>
+  <div class="tb-nav">
+    <a onclick="showView('home')" id="nav-home"><span>🏠 Nyumbani</span></a>
+    <a onclick="showView('tree')" id="nav-tree"><span>🌳 Mti</span></a>
+    <a onclick="showView('history')" id="nav-history"><span>📖 Historia</span></a>
+    <a onclick="showView('daudi')" id="nav-daudi"><span>👑 Liana</span></a>
+    <a onclick="showView('proverbs')" id="nav-proverbs"><span>💬 Misemo</span></a>
+    <a onclick="showView('gallery')" id="nav-gallery"><span>💬 Lounge</span><span id="lounge-dot" style="display:none;width:8px;height:8px;background:#4a9eff;border-radius:50%;margin-left:4px;vertical-align:middle"></span></a>
+  </div>
+  <div class="tb-search">
+    <input type="text" id="search-input" autocomplete="off" placeholder="Tafuta mtu..." oninput="handleSearch(this.value)">
+    <button class="search-clear" onclick="clearSearch()" title="Futa">✕</button>
+  </div>
+  <!-- Mobile hamburger (hidden on desktop via CSS) -->
+  <button class="tb-hamburger" onclick="openMobDrawer()" aria-label="Menyu">☰</button>
+</nav>
+
+<!-- Search row for mobile (below topbar, hidden on desktop) -->
+<div class="tb-search-row" id="tb-search-row">
+  <span style="color:rgba(201,146,42,.45);font-size:.9rem;flex-shrink:0">🔍</span>
+  <input type="text" id="search-input-mob" autocomplete="off" placeholder="Tafuta mwanaukoo kwa jina..." oninput="handleSearch(this.value)" autocomplete="off">
+  <button class="search-clear" onclick="clearSearch()" title="Futa">✕</button>
+</div>
+
+<!-- Mobile drawer nav -->
+<div class="mob-drawer" id="mob-drawer">
+  <div class="mob-backdrop" onclick="closeMobDrawer()"></div>
+  <div class="mob-panel">
+    <div class="mob-header">
+      <span class="mob-title">🌳 WAMBAGA</span>
+      <button class="mob-close-btn" onclick="closeMobDrawer()">✕</button>
+    </div>
+    <div class="mob-nav-item" id="mob-home" onclick="showView('home');closeMobDrawer()"><span class="mob-nav-icon">🏠</span>Nyumbani</div>
+    <div class="mob-nav-item" id="mob-tree" onclick="showView('tree');closeMobDrawer()"><span class="mob-nav-icon">🌳</span>Mti wa Familia</div>
+    <div class="mob-nav-item" id="mob-history" onclick="showView('history');closeMobDrawer()"><span class="mob-nav-icon">📖</span>Historia</div>
+    <div class="mob-nav-item" id="mob-daudi" onclick="showView('daudi');closeMobDrawer()"><span class="mob-nav-icon">👑</span>Familia ya Liana</div>
+    <div class="mob-nav-item" id="mob-proverbs" onclick="showView('proverbs');closeMobDrawer()"><span class="mob-nav-icon">💬</span>Misemo</div>
+    <div class="mob-nav-item" id="mob-gallery" onclick="showView('gallery');closeMobDrawer()"><span class="mob-nav-icon">💬</span>Lounge<span id="lounge-dot-mob" style="display:inline-block;width:8px;height:8px;background:#4a9eff;border-radius:50%;margin-left:6px;vertical-align:middle"></span></div>
+    <div class="mob-nav-footer">
+      <button class="auth-btn" onclick="openAuth();closeMobDrawer()" style="width:100%;text-align:center">🔐 Ingia</button>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH RESULTS -->
+<div id="search-results">
+  <div class="sr-header">
+    <div>
+      <div class="sr-title" id="sr-title">Matokeo ya Utafutaji</div>
+      <div class="sr-count" id="sr-count"></div>
+    </div>
+    <button class="btn btn-o btn-sm" onclick="clearSearch()">✕ Funga</button>
+  </div>
+  <div class="sr-grid" id="sr-grid"></div>
+</div>
+
+<div id="app">
+
+<!-- ── HOME ── -->
+<div class="view active" id="view-home">
+  <div class="hero">
+    <div class="hero-emblem">
+      <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="48" stroke="rgba(201,146,42,0.25)" stroke-width="1"/><circle cx="50" cy="50" r="38" stroke="rgba(201,146,42,0.12)" stroke-width="1"/><line x1="50" y1="78" x2="50" y2="55" stroke="#C9922A" stroke-width="3"/><path d="M50 78 Q38 83 28 86" stroke="rgba(201,146,42,0.4)" stroke-width="1.5" fill="none"/><path d="M50 78 Q62 83 72 86" stroke="rgba(201,146,42,0.4)" stroke-width="1.5" fill="none"/><path d="M50 55 Q33 47 25 35" stroke="#C9922A" stroke-width="2" fill="none"/><path d="M50 55 Q67 47 75 35" stroke="#C9922A" stroke-width="2" fill="none"/><path d="M50 60 Q40 52 36 42" stroke="rgba(201,146,42,0.7)" stroke-width="1.5" fill="none"/><path d="M50 60 Q60 52 64 42" stroke="rgba(201,146,42,0.7)" stroke-width="1.5" fill="none"/><path d="M50 63 Q50 53 50 38" stroke="#C9922A" stroke-width="2.2" fill="none"/><circle cx="25" cy="33" r="6" fill="rgba(201,146,42,0.2)" stroke="#C9922A" stroke-width="1.2"/><circle cx="75" cy="33" r="6" fill="rgba(201,146,42,0.2)" stroke="#C9922A" stroke-width="1.2"/><circle cx="50" cy="36" r="7" fill="rgba(201,146,42,0.28)" stroke="#C9922A" stroke-width="1.5"/><circle cx="36" cy="40" r="4.5" fill="rgba(201,146,42,0.18)" stroke="rgba(201,146,42,0.5)" stroke-width="1"/><circle cx="64" cy="40" r="4.5" fill="rgba(201,146,42,0.18)" stroke="rgba(201,146,42,0.5)" stroke-width="1"/></svg>
+    </div>
+    <div class="hero-pre">Ukoo wa Wambaga · Wapare wa Tanzania</div>
+    <div class="hero-title"><span style="color:var(--gold)">Mti wa</span> Familia</div>
+    <div class="hero-sub">Ukoo wa Wambaga · Milima ya Pare</div>
+    <div class="hero-quote">"Historia yetu ni nguvu yetu — vizazi vilivyopita vinaendelea kuishi katika sisi."</div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-n">~1545</span><span class="stat-l">Mwaka wa Mwanzo</span></div>
+      <div class="stat"><span class="stat-n" id="stat-people">500+</span><span class="stat-l">Wanaukoo</span></div>
+      <div class="stat"><span class="stat-n">12</span><span class="stat-l">Vizazi</span></div>
+      <div class="stat"><span class="stat-n">5</span><span class="stat-l">Matawi Makuu</span></div>
+    </div>
+    <div class="hero-btns">
+      <button class="btn btn-g" onclick="showView('tree')">🌳 Angalia Mti wa Familia</button>
+      <button class="btn btn-o" onclick="showView('history')">📖 Soma Historia</button>
+      <button class="btn btn-o" onclick="showView('gallery')">💬 Lounge</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN BACKUP PANEL -->
+<div id="admin-backup-panel" style="display:none;max-width:680px;margin:0 auto 2rem;padding:0 1.5rem">
+  <div style="border:1px solid rgba(201,146,42,0.25);border-radius:8px;padding:1.2rem 1.5rem;background:rgba(201,146,42,0.04)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <span style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,146,42,.5)">Udhibiti wa Msimamizi</span>
+      <span id="backup-sync-status" style="font-size:.65rem;color:var(--cream3)"></span>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      <button class="btn btn-o btn-sm" onclick="exportBackup()">⬇️ Pakua Backup (JSON)</button>
+      <button class="btn btn-o btn-sm" onclick="exportBackupCSV()">⬇️ Pakua Backup (CSV)</button>
+      <button class="btn btn-o btn-sm" onclick="syncAllToSupabase()">☁️ Sync Wote → Supabase</button>
+    </div>
+    <div id="backup-progress" style="display:none;margin-top:.8rem;font-size:.72rem;color:var(--cream3)"></div>
+  </div>
+</div>
+
+<!-- ── TREE VIEW ── -->
+<div class="view" id="view-tree">
+  <div class="tree-header">
+    <div class="tree-header-left">
+      <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.3rem">
+        <button class="back-btn" id="back-btn" onclick="goBack()" style="display:none" title="Rudi nyuma">
+          ← Rudi
+        </button>
+        <h2 style="margin:0" id="tree-title">Mti wa Familia — Ukoo wa Wambaga</h2>
+      </div>
+      <p id="tree-subtitle">Bonyeza mtu yeyote · 🌿 Angalia Uzao = Ingia ndani · ← Rudi = Rudi nyuma · Scroll kukuza</p>
+    </div>
+    <div class="branch-tabs" id="branch-tabs"></div>
+  </div>
+  <!-- BREADCRUMB -->
+  <div class="tree-breadcrumb" id="tree-breadcrumb" style="display:none">
+    <span class="bc-home" onclick="resetToRoot()">🏠 Mwanzo</span>
+    <span id="bc-trail"></span>
+  </div>
+  <div class="tree-canvas-wrap" id="tree-wrap">
+    <svg id="tree-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+    
+  </div>
+</div>
+
+<!-- ── HISTORY VIEW ── -->
+<div class="view" id="view-history">
+  <div style="padding:2.5rem 2rem;max-width:920px;margin:0 auto">
+
+    <!-- INTRO -->
+    <div class="history-section">
+      <p class="hs-label">Chanzo cha Ukoo</p>
+      <h2 class="hs-title">Historia ya Wambaga</h2>
+      <div class="hs-photo-admin" data-section="historia_ya_wambaga" style="display:none;margin:.5rem 0 1rem"><div id="hpg-historia_ya_wambaga" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('historia_ya_wambaga')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Wambaga ni uzao wa Bagha — mtu aliyetoka Asmara, Ethiopia, karibu mwaka 1545. Kulitokea vita vya wenyewe kwa wenyewe, na Bagha pamoja na kundi lake walikimbilia Uganda (Mbale). Miongoni mwao alikuwepo Mndome — ambaye ni uzao wa Wandeme leo. Vita ile pia ilisababisha mtawanyiko wa makabila mbalimbali kusini — Yasu (Wapare), Muthaw (Wanzava), Tigray (Wamasai), Aden-Daw (Wairaq), Barbaig (Wamangati), na wengine. Hatua kwa hatua, vizazi vilivyofuata vilihama kusini hadi kustawi katika milima ya Pare, Usangi, Tanzania.</p>
+    </div>
+
+    <!-- SVG MIGRATION MAP -->
+    <div class="history-section">
+      <p class="hs-label">Ramani ya Safari</p>
+      <h2 class="hs-title">Njia ya Uhamaji — Asmara hadi Usangi</h2>
+      <div class="hs-photo-admin" data-section="njia_ya_uhamaji__asmara_hadi_u" style="display:none;margin:.5rem 0 1rem"><div id="hpg-njia_ya_uhamaji__asmara_hadi_u" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('njia_ya_uhamaji__asmara_hadi_u')">📷 Ongeza Picha</button></div>
+      <p class="hs-body" style="margin-bottom:1.5rem">Kwa miaka zaidi ya 250, vizazi vya Wambaga vilisafiri umbali wa kilomita 3,000 — kutoka Asmara, Ethiopia hadi milima ya Pare, Tanzania. Hii ndiyo njia waliyoipita.</p>
+      <div class="map-container">
+        <svg viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg" class="hist-map">
+          <!-- Background -->
+          <rect width="700" height="520" fill="#0D0800"/>
+          <!-- Subtle grid -->
+          <defs>
+            <pattern id="mgrid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(201,146,42,0.04)" stroke-width="1"/>
+            </pattern>
+            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="rgba(201,146,42,0.6)"/>
+            </marker>
+            <filter id="glow-map">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="700" height="520" fill="url(#mgrid)"/>
+
+          <!-- Africa outline (simplified) -->
+          <path d="M 120,10 L 200,8 L 280,20 L 340,15 L 400,25 L 460,18 L 500,35 L 510,60 L 490,90 L 510,120 L 500,150 L 480,170 L 490,200 L 470,230 L 440,260 L 410,300 L 380,340 L 340,380 L 300,420 L 260,460 L 220,490 L 180,510 L 150,500 L 120,480 L 90,450 L 70,420 L 50,380 L 40,340 L 35,300 L 40,260 L 50,220 L 40,180 L 50,140 L 70,100 L 80,60 L 100,30 Z"
+            fill="rgba(40,25,5,0.7)" stroke="rgba(201,146,42,0.15)" stroke-width="1.5"/>
+
+          <!-- COUNTRY LABELS -->
+          <text x="280" y="55" fill="rgba(201,146,42,0.3)" font-size="10" font-family="Cinzel,serif" letter-spacing="2" text-anchor="middle">ETHIOPIA</text>
+          <text x="200" y="160" fill="rgba(201,146,42,0.25)" font-size="9" font-family="Cinzel,serif" letter-spacing="2" text-anchor="middle">UGANDA</text>
+          <text x="310" y="200" fill="rgba(201,146,42,0.25)" font-size="9" font-family="Cinzel,serif" letter-spacing="2" text-anchor="middle">KENYA</text>
+          <text x="250" y="340" fill="rgba(201,146,42,0.25)" font-size="9" font-family="Cinzel,serif" letter-spacing="2" text-anchor="middle">TANZANIA</text>
+
+          <!-- MIGRATION ROUTE PATH -->
+          <!-- Asmara → Uganda(Mbale) → Nairobi → Voi → Tsavo → Mkomazi → Usangi -->
+          <path d="M 310,65 Q 250,100 200,145 Q 240,165 280,185 Q 310,210 305,255 Q 300,285 290,320 Q 275,345 260,375"
+            fill="none" stroke="rgba(201,146,42,0.5)" stroke-width="2" stroke-dasharray="6,4"
+            marker-end="url(#arrowhead)"/>
+
+          <!-- Branch to Mheza/Handeni (Rindi/Mkilindi) -->
+          <path d="M 290,320 Q 330,310 360,295"
+            fill="none" stroke="rgba(150,100,30,0.4)" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+          <!-- LOCATION DOTS with glow -->
+          <!-- 1. Asmara -->
+          <circle cx="310" cy="65" r="8" fill="rgba(201,146,42,0.2)" stroke="#E8B84A" stroke-width="2" filter="url(#glow-map)"/>
+          <circle cx="310" cy="65" r="3" fill="#E8B84A"/>
+          <text x="325" y="62" fill="#E8C97A" font-size="11" font-family="Cinzel,serif" font-weight="600">Asmara</text>
+          <text x="325" y="74" fill="rgba(201,146,42,0.5)" font-size="8" font-family="Raleway,sans-serif">~1545 · Ethiopia</text>
+
+          <!-- 2. Uganda/Mbale -->
+          <circle cx="200" cy="148" r="7" fill="rgba(201,146,42,0.15)" stroke="#C9922A" stroke-width="1.5" filter="url(#glow-map)"/>
+          <circle cx="200" cy="148" r="2.5" fill="#C9922A"/>
+          <text x="215" y="145" fill="#D4A84A" font-size="10" font-family="Cinzel,serif">Mbale</text>
+          <text x="215" y="156" fill="rgba(201,146,42,0.45)" font-size="8" font-family="Raleway,sans-serif">~1575 · Uganda</text>
+
+          <!-- 3. Nairobi -->
+          <circle cx="280" cy="188" r="7" fill="rgba(201,146,42,0.15)" stroke="#C9922A" stroke-width="1.5" filter="url(#glow-map)"/>
+          <circle cx="280" cy="188" r="2.5" fill="#C9922A"/>
+          <text x="170" y="185" fill="#D4A84A" font-size="10" font-family="Cinzel,serif" text-anchor="end">Nairobi</text>
+          <text x="170" y="196" fill="rgba(201,146,42,0.45)" font-size="8" font-family="Raleway,sans-serif" text-anchor="end">~1600s · Kenya</text>
+
+          <!-- 4. Voi/Mwandau -->
+          <circle cx="305" cy="255" r="7" fill="rgba(201,146,42,0.15)" stroke="#C9922A" stroke-width="1.5" filter="url(#glow-map)"/>
+          <circle cx="305" cy="255" r="2.5" fill="#C9922A"/>
+          <text x="320" y="252" fill="#D4A84A" font-size="10" font-family="Cinzel,serif">Voi · Mwandau</text>
+          <text x="320" y="263" fill="rgba(201,146,42,0.45)" font-size="8" font-family="Raleway,sans-serif">Shambiro anakaa hapa</text>
+
+          <!-- 5. Tsavo -->
+          <circle cx="293" cy="286" r="5" fill="rgba(139,100,20,0.3)" stroke="rgba(201,146,42,0.5)" stroke-width="1"/>
+          <text x="308" y="290" fill="rgba(201,146,42,0.5)" font-size="8" font-family="Raleway,sans-serif">Mbuga ya Tsavo</text>
+
+          <!-- 6. Mkomazi -->
+          <circle cx="283" cy="306" r="5" fill="rgba(139,100,20,0.3)" stroke="rgba(201,146,42,0.5)" stroke-width="1"/>
+          <text x="197" y="310" fill="rgba(201,146,42,0.5)" font-size="8" font-family="Raleway,sans-serif" text-anchor="end">Mbuga Mkomazi</text>
+
+          <!-- 7. Hamteta/Kisiwani -->
+          <circle cx="272" cy="328" r="6" fill="rgba(201,146,42,0.12)" stroke="rgba(201,146,42,0.6)" stroke-width="1.5"/>
+          <circle cx="272" cy="328" r="2" fill="rgba(201,146,42,0.8)"/>
+          <text x="287" y="326" fill="rgba(200,170,90,0.7)" font-size="9" font-family="Cinzel,serif">Hamteta</text>
+          <text x="287" y="337" fill="rgba(201,146,42,0.4)" font-size="7.5" font-family="Raleway,sans-serif">"Kisiwani" · Kambi ya Kwanza</text>
+
+          <!-- 8. USANGI (destination — gold star) -->
+          <circle cx="260" cy="378" r="12" fill="rgba(201,146,42,0.15)" stroke="#E8B84A" stroke-width="2.5" filter="url(#glow-map)"/>
+          <circle cx="260" cy="378" r="5" fill="#C9922A"/>
+          <!-- star points -->
+          <polygon points="260,368 262,374 268,374 263,378 265,384 260,380 255,384 257,378 252,374 258,374" fill="#E8B84A" opacity="0.9"/>
+          <text x="276" y="374" fill="#E8C97A" font-size="12" font-family="Cinzel,serif" font-weight="700">USANGI</text>
+          <text x="276" y="386" fill="rgba(201,146,42,0.6)" font-size="8.5" font-family="Raleway,sans-serif">Milima ya Pare · ~1600s–leo</text>
+
+          <!-- RINDI branch to Mheza/Handeni -->
+          <circle cx="358" cy="296" r="5" fill="rgba(90,70,20,0.3)" stroke="rgba(180,130,40,0.5)" stroke-width="1"/>
+          <text x="367" y="300" fill="rgba(180,130,40,0.5)" font-size="8" font-family="Raleway,sans-serif">Mheza · Handeni (Rindi)</text>
+
+          <!-- Usangi sub-locations -->
+          <text x="220" y="400" fill="rgba(201,146,42,0.35)" font-size="7.5" font-family="Raleway,sans-serif">Kighare · Kilaweni · Kirongaya</text>
+          <text x="220" y="412" fill="rgba(201,146,42,0.35)" font-size="7.5" font-family="Raleway,sans-serif">Ngujini · Ndanda · Kimbale</text>
+
+          <!-- Mbaga -->
+          <circle cx="235" cy="358" r="5" fill="rgba(80,60,15,0.4)" stroke="rgba(180,130,40,0.4)" stroke-width="1"/>
+          <text x="180" y="362" fill="rgba(180,130,40,0.45)" font-size="8" font-family="Raleway,sans-serif" text-anchor="end">Mbaga (Chifu Nzovu)</text>
+
+          <!-- Compass rose -->
+          <g transform="translate(620,460)">
+            <circle r="22" fill="rgba(17,9,0,0.8)" stroke="rgba(201,146,42,0.3)" stroke-width="1"/>
+            <line x1="0" y1="-16" x2="0" y2="16" stroke="rgba(201,146,42,0.5)" stroke-width="1"/>
+            <line x1="-16" y1="0" x2="16" y2="0" stroke="rgba(201,146,42,0.5)" stroke-width="1"/>
+            <text x="0" y="-6" text-anchor="middle" fill="#C9922A" font-size="9" font-family="Cinzel,serif">N</text>
+            <polygon points="0,-16 3,-8 0,-10 -3,-8" fill="#C9922A" opacity="0.8"/>
+          </g>
+
+          <!-- TITLE -->
+          <text x="14" y="22" fill="rgba(201,146,42,0.7)" font-size="13" font-family="Cinzel,serif" letter-spacing="1">Njia ya Uhamaji wa Wambaga</text>
+          <text x="14" y="36" fill="rgba(201,146,42,0.35)" font-size="9" font-family="Raleway,sans-serif">~1545 – ~1600s · Km 3,000+</text>
+
+          <!-- Legend -->
+          <g transform="translate(530,30)">
+            <rect width="155" height="75" rx="2" fill="rgba(10,6,0,0.85)" stroke="rgba(201,146,42,0.2)" stroke-width="1"/>
+            <text x="10" y="16" fill="rgba(201,146,42,0.6)" font-size="8" font-family="Cinzel,serif" letter-spacing="1">MAELEZO</text>
+            <line x1="10" y1="28" x2="30" y2="28" stroke="rgba(201,146,42,0.6)" stroke-width="2" stroke-dasharray="4,3"/>
+            <text x="35" y="32" fill="rgba(201,146,42,0.55)" font-size="8" font-family="Raleway,sans-serif">Njia kuu</text>
+            <circle cx="20" cy="46" r="5" fill="rgba(201,146,42,0.2)" stroke="#E8B84A" stroke-width="1.5"/>
+            <text x="35" y="50" fill="rgba(201,146,42,0.55)" font-size="8" font-family="Raleway,sans-serif">Makao makuu</text>
+            <polygon points="20,58 22,64 28,64 23,68 25,74 20,70 15,74 17,68 12,64 18,64" fill="#E8B84A" opacity="0.8" transform="scale(0.6) translate(13,40)"/>
+            <circle cx="20" cy="64" r="4" fill="#C9922A" opacity="0.6"/>
+            <text x="35" y="68" fill="rgba(201,146,42,0.55)" font-size="8" font-family="Raleway,sans-serif">Usangi (Makazi ya Mwisho)</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="history-section">
+      <p class="hs-label">Mpangilio wa Wakati</p>
+      <h2 class="hs-title">Safari ya Miaka 500</h2>
+      <div class="hs-photo-admin" data-section="safari_ya_miaka_500" style="display:none;margin:.5rem 0 1rem"><div id="hpg-safari_ya_miaka_500" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('safari_ya_miaka_500')">📷 Ongeza Picha</button></div>
+      <div class="timeline-item">
+        <div class="tl-year">~1545</div>
+        <div class="tl-title">Vita vya Asmara — Asili ya Wambaga</div>
+        <div class="tl-desc">Bagha anatoka Asmara, Ethiopia. Vita vya ndani vinamlazimisha kukimbia pamoja na kundi lake kwenda Uganda (Mbale). Miongoni mwao alikuwepo Mndome — babu wa Wandeme. Vita ile ilisababisha mtawanyiko wa makabila mengi kusini: Yasu (Wapare), Muthaw (Wanzava), Tigray (Wamasai), Aden-Daw (Wairaq), Barbaig (Wamangati).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1575</div>
+        <div class="tl-title">Uganda → Kenya — Bagha na Mlavi</div>
+        <div class="tl-desc">Bagha na mtoto wake Mlavi wanakaa Uganda (Mbale) kisha wanahama Nairobi. Mlavi ana watoto wawili: Mwangi (wabaki Kenya hadi leo) na Shambiro (anaendelea safari kusini). Shambiro anakaa Kitui, Machakosi, na Voi — katika Kijiji cha Mwandau.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1600s</div>
+        <div class="tl-title">Shambiro — Baba wa Matawi Yote Makuu</div>
+        <div class="tl-desc">Watoto wa Shambiro: Bangalala, Mbaniko (alioa mke wa Kimasai Namanga Sayore), Sinta/Sinda, Sengasu, na Bi Kokidia. Sengasu ndiye wa kwanza kuvuka Tanzania — akiwa na watoto wake watano: Rindi, Kuare, Walongwa, Nankondo, na Namhezi. Walipita Tsavo, Mkomazi, Kilima cha Mazara, Kilima cha Kamirangi, hadi Kisiwani — pakaitwa "Hamteta" (kwa mtu anayetoka Teta/Taveta).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1600s</div>
+        <div class="tl-title">Rindi Mkilindi — Nasaba ya Watawala wa Lushoto</div>
+        <div class="tl-desc">Rindi (mtoto wa Sengasu) alikaa Mheza, Handeni, milima ya Nguu. Uzao wake ukawa watawala wakubwa: Rindi → Shebughe Mkilindi → Kimweri Mkilindi (Lushoto) → Mbega Vuga → Simba Mwene → N. Rindi → Kirota Moshi na Meli Mandara (1882). Nasaba hii ya Mkilindi ilikuwa na nguvu kubwa Kaskazini mwa Tanzania.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1600s</div>
+        <div class="tl-title">Nkuare na Walongwa — Wataalamu wa Asili</div>
+        <div class="tl-desc">Nkuare (Mmbaga wa Madiveni) alipewa kazi ya kuleta mvua na mtawala. Walongwa (Mmbaga wa Mramba) aliishi karibu na msitu wa Wambaga uitwao Mashankwe — kazi yake ilikuwa kubariki vyakula (kuhoja) na kuondoa wadudu mashambani (menda). Ustadi huu wa asili ndiyo uliwafanya watawala wa Usangi wawaheshimu Wambaga.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1805</div>
+        <div class="tl-title">Vita vya Usangi — Ushindi wa Chachika</div>
+        <div class="tl-desc">Wagweno (wakisaidiwa na Wachaga na Wasangi wengine) walivamia Usangi. Chifu Munga Kereke — chifu wa Usangi kutoka ukoo wa Wasangi — alielewa anapigwa vita kali. Alienda Mbaga kumwomba Chifu Nzovu msaada. Nzovu akamtuma mwanae Chachikamazina (Chachika) — jemadari wa vita akiwa na miaka 20 tu — akaongoza jeshi la koo zote za Wapare kutoka Chiefdom ya Nzovu. Wakafanikiwa kuwafukuza Wagweno. Wagweno walijaribu kuvamia tena — Chasimba akapelekwa kama jemadari wa pili, lakini vita haikutokea. Kutokana na ushindi na ustadi wa kuhoja na menda, Chifu Munga aliwazawadia Wambaga uchifu — Chachika akawa chifu wa kwanza wa Usangi kutoka ukoo wa Wambaga.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1800–1850</div>
+        <div class="tl-title">Chanzo cha Mireshe — Vita na Utumwa wa Wasangi na Wagweno</div>
+        <div class="tl-desc" style="line-height:1.9">
+          <strong style="color:var(--gold)">Muktadha wa Kihistoria:</strong> Katika karne ya 19, biashara ya watumwa ilienea kwa nguvu kubwa Afrika Mashariki. Mtandao wa biashara hii ulienea kutoka pwani ya Zanzibar kupitia njia kuu za ardhi — Bagamoyo, Pangani — hadi vilele vya milima ya Pare na Kilimanjaro. Waarabu na Waswahili walikuwa wafanyabiashara wakuu, wakipata watumwa kwa njia ya vita na mashambulizi ya makusudi.
+          <br><br>
+          <strong style="color:var(--gold)">Vita Kati ya Makabila:</strong> Kabla ya Vita vya Usangi (~1805), Chachika wa Wambaga alipigana vita vikali dhidi ya Mfumwa wa Wasangi. Hizi zilikuwa vita za kisiasa na kiuchumi — Wasangi walitaka kudhibiti ardhi na biashara ya eneo la Usangi. Vita hivi viliongeza shinikizo kubwa kwa makabila yote ya milima ya Pare.
+          <br><br>
+          <strong style="color:var(--gold)">Mireshe (Raids za Utumwa):</strong> Baada ya Chachika kushinda Vita vya Usangi, tishio jipya lilikuja — mashambulizi ya usiku (Mireshe). Makabila jirani kama <strong>Wagweno</strong>, wakisaidiwa mara nyingi na <strong>Wachaga</strong> wa Kilimanjaro na mawakala wa biashara ya watumwa, walifanya mashambulizi ya ghafla ya usiku — wakisudi kukamata watu wenye nguvu, wanawake vijana, na watoto. Hizi ndizo zilizojulikana kama "Mireshe" — neno linalomaanisha shambulio la ghafla la usiku lenye lengo la kupiga na kukimbia.
+          <br><br>
+          <strong style="color:var(--gold)">Njia ya Watumwa:</strong> Watu waliokuwa wamekamatiwa walifungwa kamba shingoni (mnyororo wa kamba) na kupelekwa kwa miguu umbali wa mamia ya kilomita hadi pwani — Pangani, Bagamoyo, au Mombasa. Huko walinunuliwa na wafanyabiashara wa Kiarabu na kupelekwa mashua hadi Zanzibar, Oman, Mashariki ya Kati, na hata India. Maelfu ya Wapare walipoteza uhuru wao kwa njia hii.
+          <br><br>
+          <strong style="color:var(--gold)">Hofu Iliyoumba Umoja:</strong> Tishio hili kubwa liliwafanya Wapare — na hasa Wambaga — kuungana. Waliunda mfumo wa walinzi wa usiku, walianzisha ishara za onyo, na hatimaye waliamua kuchimba suluhisho kubwa zaidi: Mireshe — mahandaki makubwa ya ulinzi chini ya ardhi.
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1805+</div>
+        <div class="tl-title">Mireshe — Mfumo wa Busara wa Ulinzi wa Ardhi</div>
+        <div class="tl-desc">Baada ya vita na mashambulizi ya utumwa, Wambaga walichimba mahandaki makubwa (Mireshe) chini ya ardhi. Mahandaki haya yalikuwa makubwa kiasi cha kujificha familia nyingi pamoja na mifugo yao. Yaliendelea chini kwa chini kilomita nyingi — kila baada ya umbali fulani kulikuwa na sehemu ya kupumua hewa, waliita <strong>"pua."</strong> Ungeweza kuingia kijiji kimoja na kutokea kijiji kingine kupitia chini ya ardhi. Ubunifu huu mkubwa uliokoa maisha ya maelfu ya Wambaga. Mahandaki hayo yapo hadi leo — handaki kuu lipo Goma, Kijiji cha Kimbale, na linatumika kama kivutio cha watalii.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">1959</div>
+        <div class="tl-title">Mashanga / Masudi Anafariki</div>
+        <div class="tl-desc">Tarehe 9/5/1959, Mzee Mashanga/Masudi — mtoto mkubwa wa Mpombeyagonja — anafariki Usangi Kirongaya. Alioa wanawake wanne: Namcheja/Mariamu, Nakio/Zuhura, Mwajuma/Naikube, na Namshitu. Akaacha watoto 18 na vizazi vingi ambavyo bado vinaendelea hadi leo.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">1982</div>
+        <div class="tl-title">Historia ya Ukoo Inaanza Kukusanywa</div>
+        <div class="tl-desc">Mzee Sudi Juma Kinenekejo alitoa wazo la kukusanya na kuandika historia ya ukoo wa Wambaga. Wazee wa familia walianza kukutana — mwanzo wa kazi kubwa ya kuhifadhi historia iliyokuwa ikiishi kichwani peke yake kwa vizazi vingi.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">~1990s</div>
+        <div class="tl-title">Mzee Aliamani Kachenje — Mlezi wa Historia</div>
+        <div class="tl-desc">Familia ilikutana tena na Mzee Aliamani Kachenje huko Mwanga. Mzee Aliamani alikuwa amehifadhi historia yote kichwani — majina ya vizazi vya kila ukoo wa Wambaga hadi kizazi cha tano, sita, hata saba. Historia ile iliandikwa hatua kwa hatua. "Mzee huyu anastahili kuenziwa na Wambaga — alifanya kazi kubwa sana."</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">2020</div>
+        <div class="tl-title">Kitabu cha Historia Kinachapishwa</div>
+        <div class="tl-desc">Alhaji Issa Mlao Yusufu Mavura anachapisha kitabu kamili cha historia ya Wambaga — msingi mkubwa wa kumbukumbu ya ukoo huu. Kitabu kilizindua historia iliyokuwa imehifadhiwa kichwani kwa vizazi vingi.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-year">Leo</div>
+        <div class="tl-title">Programu Hii — Endelea na Historia</div>
+        <div class="tl-desc">Vizazi vipya vinaendelea kuzaliwa. Programu hii inakusanya na kuhifadhi historia, picha, na kumbukumbu — kuhakikisha kizazi kingine kinaijua historia yake. Wambaga wanaendelea kuishi Usangi Kirongaya, Ngujini, Kilaweni, Ndanda, Kighare, Kimbale — na kote duniani.</div>
+      </div>
+    </div>
+
+    <!-- MILA ZA WAPARE -->
+    <div class="history-section">
+      <p class="hs-label">Mila za Kale</p>
+      <h2 class="hs-title">Mila Tano za Wapare</h2>
+      <div class="hs-photo-admin" data-section="mila_tano_za_wapare" style="display:none;margin:.5rem 0 1rem"><div id="hpg-mila_tano_za_wapare" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('mila_tano_za_wapare')">📷 Ongeza Picha</button></div>
+      <p class="hs-body" style="margin-bottom:1.5rem">Wapare ni watu wanaothamini haki na ukweli. Rais wa kwanza wa Tanzania, Mwalimu Julius Kambarage Nyerere, aliwahi kusema: <em>"Ukitaka mhasibu mzuri basi chukua Mpare."</em> Hii inatokana na mila zifuatazo:</p>
+      <div class="mila-grid">
+        <div class="mila-card">
+          <div class="mila-num">I</div>
+          <div class="mila-name">Kuthetha</div>
+          <div class="mila-desc">Kama hukumu ya wazee haikusaidii, unaweza kupeleka mashita kwa mizimu ya mababu. Unatoa mbuzi wa sadaka kwenye makaburi ya kimila (Kwachegho, Kwamnduwambele). Ukiwa mkweli, mbuzi atatembea mwenyewe kwenda mahali pa sadaka — ukiwa na uongo, atakataa kutembea. Uthibitisho huu wa asili unaamuliwa na wazee wa mila.</div>
+        </div>
+        <div class="mila-card">
+          <div class="mila-num">II</div>
+          <div class="mila-name">Kurighia</div>
+          <div class="mila-desc">Ili kuepuka laana kali ya mtambiko kamili, pande mbili zinachagua Kurighia. Kila upande unashika mbuzi na kutamka kiungo cha ndani (ini, utumbo) kama chombo cha ukweli wake. Mbuzi anachinjwa papo hapo — wazee wanaangalia kiungo. Kiungo kizima: umefaulu. Kina kasoro au rangi mbaya: umeshindwa, utalipa faini kubwa. Hakuna rufaa.</div>
+        </div>
+        <div class="mila-card">
+          <div class="mila-num">III</div>
+          <div class="mila-name">Kushotana</div>
+          <div class="mila-desc">Kama watu wawili wamedhulumiana na baraza la wazee haliwezi kuhukumu, basi mnashotana — kuapizana — ili kumtambua mwenye haki kati yenu wawili. Mtu anayeapiza kwa uongo ataathirika mwenyewe.</div>
+        </div>
+        <div class="mila-card">
+          <div class="mila-num">IV</div>
+          <div class="mila-name">Kubigha Nyungu</div>
+          <div class="mila-desc">Inafanywa zaidi na wanawake walio katika ndoa za kuteswa bila mtoto. Mtu anayetumia mila hii anakubaliana kufa kwanza kama kichocheo cha kisasisi. Kifo chake kitasababisha adhabu ya kimungu itakayoandama waliomdhulumu pamoja na uzao wao wa damu. <strong style="color:rgba(200,100,80,0.9)">Muhimu:</strong> laana inalenga damu maalum — mgeni asiye na uhusiano wa damu hadhuriki, hata kama anaishi katika familia ile ile.</div>
+        </div>
+        <div class="mila-card">
+          <div class="mila-num">V</div>
+          <div class="mila-name">Kubigha Mma / Kula Mma</div>
+          <div class="mila-desc">Kama mtu amekudhulumu na humjui, unafanya kitendo hiki na kitamfuata aliyekudhulumu. Pia, kama mmekubaliana kufanya jambo la siri ili mmoja asije kumgeuka mwenzake — mnakula mma. Mbuzi anachinjwa, dawa inakorogwa, mnakula kwa kuapizana. Atakayegeuka ataadhibiwa.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIRESHE -->
+    <div class="history-section">
+      <p class="hs-label">Maajabu ya Uhandisi wa Kale</p>
+      <h2 class="hs-title">Mireshe — Mahandaki ya Ulinzi</h2>
+      <div class="hs-photo-admin" data-section="mireshe__mahandaki_ya_ulinzi" style="display:none;margin:.5rem 0 1rem"><div id="hpg-mireshe__mahandaki_ya_ulinzi" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('mireshe__mahandaki_ya_ulinzi')">📷 Ongeza Picha</button></div>
+      <div class="mireshe-visual">
+        <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;margin:0 auto 1.5rem">
+          <!-- Ground surface -->
+          <rect x="0" y="0" width="600" height="60" fill="rgba(40,25,5,0.4)"/>
+          <rect x="0" y="60" width="600" height="100" fill="rgba(20,10,0,0.6)"/>
+          <!-- Surface trees -->
+          <line x1="80" y1="60" x2="80" y2="30" stroke="rgba(90,120,60,0.5)" stroke-width="2"/>
+          <ellipse cx="80" cy="28" rx="12" ry="10" fill="rgba(60,90,40,0.4)"/>
+          <line x1="200" y1="60" x2="200" y2="20" stroke="rgba(90,120,60,0.5)" stroke-width="2"/>
+          <ellipse cx="200" cy="18" rx="16" ry="12" fill="rgba(60,90,40,0.35)"/>
+          <line x1="380" y1="60" x2="380" y2="25" stroke="rgba(90,120,60,0.5)" stroke-width="2"/>
+          <ellipse cx="380" cy="23" rx="14" ry="11" fill="rgba(60,90,40,0.4)"/>
+          <line x1="520" y1="60" x2="520" y2="35" stroke="rgba(90,120,60,0.5)" stroke-width="2"/>
+          <ellipse cx="520" cy="33" rx="11" ry="9" fill="rgba(60,90,40,0.35)"/>
+          <!-- Houses on surface -->
+          <polygon points="120,60 130,45 140,60" fill="rgba(139,90,30,0.4)" stroke="rgba(201,146,42,0.3)" stroke-width="1"/>
+          <rect x="123" y="53" width="14" height="7" fill="rgba(100,60,20,0.4)"/>
+          <polygon points="440,60 452,43 464,60" fill="rgba(139,90,30,0.4)" stroke="rgba(201,146,42,0.3)" stroke-width="1"/>
+          <rect x="443" y="52" width="14" height="8" fill="rgba(100,60,20,0.4)"/>
+          <!-- Ground line -->
+          <line x1="0" y1="60" x2="600" y2="60" stroke="rgba(201,146,42,0.3)" stroke-width="1.5" stroke-dasharray="8,4"/>
+          <!-- Underground tunnel -->
+          <path d="M 40,100 Q 130,85 220,100 Q 310,115 400,100 Q 490,85 570,100" fill="none" stroke="rgba(201,146,42,0.5)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 40,100 Q 130,85 220,100 Q 310,115 400,100 Q 490,85 570,100" fill="none" stroke="rgba(8,4,0,0.9)" stroke-width="7" stroke-linecap="round"/>
+          <path d="M 40,100 Q 130,85 220,100 Q 310,115 400,100 Q 490,85 570,100" fill="none" stroke="rgba(201,146,42,0.15)" stroke-width="4" stroke-linecap="round"/>
+          <!-- Pua (air holes) -->
+          <line x1="130" y1="60" x2="130" y2="90" stroke="rgba(201,146,42,0.4)" stroke-width="2" stroke-dasharray="3,3"/>
+          <circle cx="130" cy="90" r="3" fill="rgba(201,146,42,0.5)"/>
+          <text x="130" y="80" fill="rgba(201,146,42,0.5)" font-size="7" font-family="Raleway,sans-serif" text-anchor="middle">Pua</text>
+          <line x1="310" y1="60" x2="310" y2="112" stroke="rgba(201,146,42,0.4)" stroke-width="2" stroke-dasharray="3,3"/>
+          <circle cx="310" cy="112" r="3" fill="rgba(201,146,42,0.5)"/>
+          <text x="310" y="80" fill="rgba(201,146,42,0.5)" font-size="7" font-family="Raleway,sans-serif" text-anchor="middle">Pua</text>
+          <line x1="490" y1="60" x2="490" y2="90" stroke="rgba(201,146,42,0.4)" stroke-width="2" stroke-dasharray="3,3"/>
+          <circle cx="490" cy="90" r="3" fill="rgba(201,146,42,0.5)"/>
+          <text x="490" y="80" fill="rgba(201,146,42,0.5)" font-size="7" font-family="Raleway,sans-serif" text-anchor="middle">Pua</text>
+          <!-- Entry/exit arrows -->
+          <text x="40" y="98" fill="#C9922A" font-size="9" font-family="Cinzel,serif" text-anchor="middle">↓</text>
+          <text x="570" y="98" fill="#C9922A" font-size="9" font-family="Cinzel,serif" text-anchor="middle">↑</text>
+          <!-- People in tunnel -->
+          <circle cx="180" cy="100" r="4" fill="rgba(201,146,42,0.3)" stroke="rgba(201,146,42,0.5)" stroke-width="1"/>
+          <circle cx="220" cy="101" r="4" fill="rgba(201,146,42,0.25)" stroke="rgba(201,146,42,0.4)" stroke-width="1"/>
+          <circle cx="390" cy="101" r="4" fill="rgba(201,146,42,0.3)" stroke="rgba(201,146,42,0.5)" stroke-width="1"/>
+          <!-- Labels -->
+          <text x="300" y="18" fill="rgba(201,146,42,0.6)" font-size="10" font-family="Cinzel,serif" text-anchor="middle">Usangi juu ya ardhi</text>
+          <text x="300" y="148" fill="rgba(201,146,42,0.5)" font-size="9" font-family="Raleway,sans-serif" text-anchor="middle">Mahandaki ya MIRESHE — chini ya ardhi · Handaki kuu: Goma, Kijiji cha Kimbale</text>
+        </svg>
+      </div>
+      <p class="hs-body">Mahandaki haya (Mireshe) yalikuwa makubwa kiasi cha kuweza kujificha familia nyingi wakiwa na mifugo yao. Yaliendelea chini kwa chini kilometa nyingi — kila baada ya umbali fulani kulikuwa na sehemu ya kupumua hewa, waliita <strong style="color:var(--gold)">"pua."</strong> Ungeweza kuingia kijiji kimoja na kutokea kijiji kingine kupitia chini ya ardhi. Mahandaki hayo yapo hadi leo na yanatumika kama vivutio vya watalii. Handaki kuu lipo Goma, Kijiji cha Kimbale.</p>
+    </div>
+
+    <!-- KITABU SECTION -->
+    <div class="history-section">
+      <p class="hs-label">Kumbukumbu ya Ukoo</p>
+      <h2 class="hs-title">Jinsi Historia Ilivyohifadhiwa</h2>
+      <div class="hs-photo-admin" data-section="jinsi_historia_ilivyohifadhiwa" style="display:none;margin:.5rem 0 1rem"><div id="hpg-jinsi_historia_ilivyohifadhiwa" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('jinsi_historia_ilivyohifadhiwa')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Historia hii yote ilihifadhiwa kichwani na <strong style="color:var(--gold)">Mzee Aliamani Kachenje</strong> wa Usangi Ngujini — bila kuandika, bila kompyuta. Alijua majina ya vizazi vya kila ukoo wa Wambaga hadi kizazi cha saba. Mwaka 1982, wazee wa familia waliungana naye na historia ile iliandikwa hatua kwa hatua. Mwaka 2019–2020, <strong style="color:var(--gold)">Alhaji Issa Mlao Yusufu Mavura</strong> alichapisha kitabu kamili. Programu hii inaendelea kazi ya wazee hawa — ikihifadhi historia kwa vizazi vinavyokuja.</p>
+    </div>
+
+    <!-- MAKABILA YALIYOTAWANYIKA -->
+    <div class="history-section">
+      <p class="hs-label">Vita vya Asmara — Mtawanyiko Mkubwa</p>
+      <h2 class="hs-title">Makabila Yaliyozaliwa Kutoka Vita Moja</h2>
+      <div class="hs-photo-admin" data-section="makabila_yaliyozaliwa_kutoka_v" style="display:none;margin:.5rem 0 1rem"><div id="hpg-makabila_yaliyozaliwa_kutoka_v" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('makabila_yaliyozaliwa_kutoka_v')">📷 Ongeza Picha</button></div>
+      <p class="hs-body" style="margin-bottom:1.5rem">Vita vya wenyewe kwa wenyewe vya Asmara (~1545) vilisababisha mtawanyiko wa makabila mengi kuelekea kusini. Wambaga (kupitia Bagha) ni moja ya mizizi mingi iliyotoka vita moja ile. Makabila yaliyotawanyika wakati huo ni pamoja na:</p>
+      <div class="tribes-grid">
+        <div class="tribe-card"><div class="tribe-name">Yasu</div><div class="tribe-now">→ Wapare</div><div class="tribe-loc">Milima ya Pare, Tanzania</div></div>
+        <div class="tribe-card"><div class="tribe-name">Muthaw</div><div class="tribe-now">→ Wanzava</div><div class="tribe-loc">Tanzania</div></div>
+        <div class="tribe-card"><div class="tribe-name">Tigray</div><div class="tribe-now">→ Wamasai</div><div class="tribe-loc">Kenya / Tanzania</div></div>
+        <div class="tribe-card"><div class="tribe-name">Aden-Daw</div><div class="tribe-now">→ Wairaq</div><div class="tribe-loc">Tanzania</div></div>
+        <div class="tribe-card"><div class="tribe-name">Barbaig</div><div class="tribe-now">→ Wamangati</div><div class="tribe-loc">Tanzania</div></div>
+        <div class="tribe-card"><div class="tribe-name">Wandeme</div><div class="tribe-now">→ Wandeme</div><div class="tribe-loc">Pamoja na Bagha kutoka Asmara</div></div>
+      </div>
+      <p class="hs-body" style="margin-top:1.2rem">Wote wao walianza safari kutoka mahali pamoja — Asmara, Ethiopia. Leo wanaishi nchi tofauti, wana lugha tofauti, mila tofauti — lakini wana asili moja ya mbali. Wambaga, kwa njia ya Bagha na Mlavi na Shambiro, waliishia kuwa nguzo ya Wapare wa Usangi.</p>
+    </div>
+
+    <!-- USANGI LOCATIONS MAP -->
+    <div class="history-section">
+      <p class="hs-label">Makazi ya Wambaga Usangi</p>
+      <h2 class="hs-title">Wambaga Wanaishi Wapi Usangi?</h2>
+      <div class="hs-photo-admin" data-section="wambaga_wanaishi_wapi_usangi" style="display:none;margin:.5rem 0 1rem"><div id="hpg-wambaga_wanaishi_wapi_usangi" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('wambaga_wanaishi_wapi_usangi')">📷 Ongeza Picha</button></div>
+      <p class="hs-body" style="margin-bottom:1.5rem">Matawi tofauti ya Wambaga yalikaa maeneo tofauti ya Usangi na Pare. Hapa ni muhtasari wa jinsi matawi yalivyogawanyika kijiografia:</p>
+      <div class="locations-map-wrap">
+        <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;border:1px solid rgba(201,146,42,0.15);background:#0D0800">
+          <defs>
+            <pattern id="lgrid" width="30" height="30" patternUnits="userSpaceOnUse">
+              <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(201,146,42,0.04)" stroke-width="1"/>
+            </pattern>
+            <filter id="glow2"><feGaussianBlur stdDeviation="2.5" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="680" height="380" fill="url(#lgrid)"/>
+
+          <!-- Pare mountains silhouette -->
+          <path d="M 0,200 Q 80,120 160,160 Q 220,130 290,170 Q 360,140 420,175 Q 490,145 560,165 Q 620,150 680,170 L 680,380 L 0,380 Z"
+            fill="rgba(30,18,5,0.7)" stroke="rgba(201,146,42,0.12)" stroke-width="1.5"/>
+          <!-- Mountain peaks -->
+          <path d="M 160,160 L 200,105 L 240,155" fill="rgba(40,25,8,0.6)" stroke="rgba(201,146,42,0.2)" stroke-width="1"/>
+          <path d="M 300,165 L 340,110 L 380,158" fill="rgba(40,25,8,0.6)" stroke="rgba(201,146,42,0.2)" stroke-width="1"/>
+          <path d="M 440,170 L 475,115 L 510,168" fill="rgba(40,25,8,0.6)" stroke="rgba(201,146,42,0.2)" stroke-width="1"/>
+          <!-- Label: Milima ya Pare -->
+          <text x="340" y="95" fill="rgba(201,146,42,0.3)" font-size="11" font-family="Cinzel,serif" letter-spacing="3" text-anchor="middle">MILIMA YA PARE</text>
+
+          <!-- LOCATION DOTS - Mbaniko branch -->
+          <circle cx="170" cy="230" r="9" fill="rgba(201,146,42,0.18)" stroke="#E8B84A" stroke-width="2" filter="url(#glow2)"/>
+          <circle cx="170" cy="230" r="3.5" fill="#E8B84A"/>
+          <text x="185" y="226" fill="#E8C97A" font-size="10" font-family="Cinzel,serif" font-weight="600">Kirongaya</text>
+          <text x="185" y="238" fill="rgba(201,146,42,0.5)" font-size="8" font-family="Raleway,sans-serif">Mbaniko · Mpombeyagonja</text>
+
+          <circle cx="220" cy="255" r="8" fill="rgba(201,146,42,0.15)" stroke="#C9922A" stroke-width="1.5" filter="url(#glow2)"/>
+          <circle cx="220" cy="255" r="3" fill="#C9922A"/>
+          <text x="235" y="251" fill="#D4A84A" font-size="10" font-family="Cinzel,serif">Ngujini</text>
+          <text x="235" y="262" fill="rgba(201,146,42,0.45)" font-size="8" font-family="Raleway,sans-serif">Mbaniko · Aliamani Kachenje</text>
+
+          <!-- Sengasu/Chachika -->
+          <circle cx="390" cy="220" r="9" fill="rgba(201,146,42,0.18)" stroke="#E8B84A" stroke-width="2" filter="url(#glow2)"/>
+          <circle cx="390" cy="220" r="3.5" fill="#E8B84A"/>
+          <text x="405" y="216" fill="#E8C97A" font-size="10" font-family="Cinzel,serif" font-weight="600">Kighare</text>
+          <text x="405" y="228" fill="rgba(201,146,42,0.5)" font-size="8" font-family="Raleway,sans-serif">Chachika · Chifu wa Kwanza</text>
+
+          <circle cx="330" cy="240" r="8" fill="rgba(201,146,42,0.15)" stroke="#C9922A" stroke-width="1.5" filter="url(#glow2)"/>
+          <circle cx="330" cy="240" r="3" fill="#C9922A"/>
+          <text x="345" y="236" fill="#D4A84A" font-size="10" font-family="Cinzel,serif">Kilaweni</text>
+          <text x="345" y="247" fill="rgba(201,146,42,0.45)" font-size="8" font-family="Raleway,sans-serif">Chasimba · Sengasu</text>
+
+          <!-- Bangalala -->
+          <circle cx="490" cy="235" r="8" fill="rgba(201,146,42,0.15)" stroke="#C9922A" stroke-width="1.5" filter="url(#glow2)"/>
+          <circle cx="490" cy="235" r="3" fill="#C9922A"/>
+          <text x="505" y="231" fill="#D4A84A" font-size="10" font-family="Cinzel,serif">Ndanda</text>
+          <text x="505" y="242" fill="rgba(201,146,42,0.45)" font-size="8" font-family="Raleway,sans-serif">Bangalala · Kiriche</text>
+
+          <!-- Kimbale (Mireshe) -->
+          <circle cx="270" cy="290" r="10" fill="rgba(139,58,42,0.25)" stroke="rgba(220,120,80,0.7)" stroke-width="2" filter="url(#glow2)"/>
+          <circle cx="270" cy="290" r="4" fill="rgba(220,120,80,0.8)"/>
+          <text x="285" y="287" fill="rgba(220,150,100,0.9)" font-size="10" font-family="Cinzel,serif" font-weight="600">Kimbale · Goma</text>
+          <text x="285" y="298" fill="rgba(220,100,60,0.6)" font-size="8" font-family="Raleway,sans-serif">🏛 Handaki la Mireshe (Vivutio vya Watalii)</text>
+
+          <!-- Usangi town -->
+          <circle cx="300" cy="210" r="11" fill="rgba(201,146,42,0.08)" stroke="rgba(201,146,42,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="300" y="195" fill="rgba(201,146,42,0.5)" font-size="9" font-family="Cinzel,serif" letter-spacing="2" text-anchor="middle">USANGI</text>
+
+          <!-- Mbaga (Luvigho) -->
+          <circle cx="130" cy="290" r="7" fill="rgba(201,146,42,0.12)" stroke="rgba(201,146,42,0.4)" stroke-width="1.2"/>
+          <circle cx="130" cy="290" r="2.5" fill="rgba(201,146,42,0.6)"/>
+          <text x="100" y="287" fill="rgba(201,146,42,0.55)" font-size="9" font-family="Cinzel,serif" text-anchor="end">Mbaga</text>
+          <text x="100" y="298" fill="rgba(201,146,42,0.35)" font-size="7.5" font-family="Raleway,sans-serif" text-anchor="end">Luvigho · Chifu Nzovu</text>
+
+          <!-- Mwanga -->
+          <circle cx="570" cy="290" r="7" fill="rgba(201,146,42,0.12)" stroke="rgba(201,146,42,0.4)" stroke-width="1.2"/>
+          <circle cx="570" cy="290" r="2.5" fill="rgba(201,146,42,0.6)"/>
+          <text x="585" y="287" fill="rgba(201,146,42,0.55)" font-size="9" font-family="Cinzel,serif">Mwanga</text>
+          <text x="585" y="298" fill="rgba(201,146,42,0.35)" font-size="7.5" font-family="Raleway,sans-serif">Mwanga</text>
+
+          <!-- Vudee/Makanya (Chalambo) -->
+          <circle cx="450" cy="265" r="6" fill="rgba(201,146,42,0.1)" stroke="rgba(201,146,42,0.3)" stroke-width="1"/>
+          <circle cx="450" cy="265" r="2" fill="rgba(201,146,42,0.5)"/>
+          <text x="463" y="262" fill="rgba(201,146,42,0.45)" font-size="8.5" font-family="Cinzel,serif">Vudee · Makanya</text>
+          <text x="463" y="272" fill="rgba(201,146,42,0.3)" font-size="7" font-family="Raleway,sans-serif">Chalambo</text>
+
+          <!-- Legend -->
+          <rect x="10" y="10" width="200" height="75" fill="rgba(17,9,0,0.85)" rx="2"/>
+          <circle cx="24" cy="28" r="5" fill="rgba(201,146,42,0.2)" stroke="#E8B84A" stroke-width="1.5"/>
+          <text x="35" y="32" fill="rgba(201,146,42,0.7)" font-size="8" font-family="Raleway,sans-serif">Makazi Makuu ya Wambaga</text>
+          <circle cx="24" cy="46" r="5" fill="rgba(201,146,42,0.1)" stroke="rgba(201,146,42,0.35)" stroke-width="1.2"/>
+          <text x="35" y="50" fill="rgba(201,146,42,0.55)" font-size="8" font-family="Raleway,sans-serif">Maeneo Mengine</text>
+          <circle cx="24" cy="64" r="5" fill="rgba(139,58,42,0.25)" stroke="rgba(220,120,80,0.7)" stroke-width="1.5"/>
+          <text x="35" y="68" fill="rgba(220,150,100,0.6)" font-size="8" font-family="Raleway,sans-serif">Kivutio cha Kihistoria</text>
+
+          <!-- Scale bar -->
+          <line x1="560" y1="355" x2="640" y2="355" stroke="rgba(201,146,42,0.4)" stroke-width="1.5"/>
+          <line x1="560" y1="350" x2="560" y2="360" stroke="rgba(201,146,42,0.4)" stroke-width="1.5"/>
+          <line x1="640" y1="350" x2="640" y2="360" stroke="rgba(201,146,42,0.4)" stroke-width="1.5"/>
+          <text x="600" y="370" fill="rgba(201,146,42,0.4)" font-size="7" font-family="Raleway,sans-serif" text-anchor="middle">~20 km</text>
+        </svg>
+      </div>
+      <p class="hs-body" style="margin-top:1rem">Kila tawi la Wambaga lilikaa eneo lake — lakini wote wanajuana na wanashirikiana. Usangi ni mji wa kati unaounganisha matawi yote. Mbaga ndiyo asili ya Chifu Nzovu — baba wa Chachika, aliyepewa uchifu wa Usangi baada ya ushindi wa ~1805.</p>
+    </div>
+
+    <!-- NYerere quote & Kutema Ngani -->
+    <div class="history-section">
+      <p class="hs-label">Sifa za Wapare</p>
+      <h2 class="hs-title">Wapare katika Historia ya Tanzania</h2>
+      <div class="hs-photo-admin" data-section="wapare_katika_historia_ya_tanz" style="display:none;margin:.5rem 0 1rem"><div id="hpg-wapare_katika_historia_ya_tanz" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('wapare_katika_historia_ya_tanz')">📷 Ongeza Picha</button></div>
+      <div style="border-left:3px solid var(--gold);padding:1rem 1.5rem;margin:1.5rem 0;background:rgba(201,146,42,0.04)">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--cream2);line-height:1.8">"Ukitaka mhasibu mzuri basi chukua Mpare."</p>
+        <p style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:.5rem">— Mwalimu Julius Kambarage Nyerere, Rais wa Kwanza wa Tanzania</p>
+      </div>
+      <p class="hs-body">Maneno haya ya Mwalimu Nyerere yanaonyesha jinsi Wapare walivyojulikana kwa uaminifu na uadilifu. Mila za Kuthetha, Kurighia, na Kushotana ziliwafundisha kuwa watu wa kweli, wakiogopa adhabu ya asili kama watasema uongo. Utamaduni huu wa haki ulijenga tabia ya kizazi baada ya kizazi.</p>
+      <p class="hs-body" style="margin-top:1rem">Mila nyingine ya Wapare inayostahili kuzingatiwa ni <strong style="color:var(--gold)">Kutema Ngani</strong> — baada ya vita, askari wanakaa duara na kila mmoja anaenda katikati ya duara akiwa na silaha zake, akieleza kitendo cha ushujaa alichofanya vitani. Hii ilikuwa njia ya kutambua mashujaa na kuwafundisha vijana ushujaa wa kweli — si kujisifu, bali kutoa ushahidi.</p>
+    </div>
+
+    <!-- WALONGWA section -->
+    <div class="history-section">
+      <p class="hs-label">Walinzi wa Asili</p>
+      <h2 class="hs-title">Walongwa — Mlezi wa Mashamba</h2>
+      <div class="hs-photo-admin" data-section="walongwa__mlezi_wa_mashamba" style="display:none;margin:.5rem 0 1rem"><div id="hpg-walongwa__mlezi_wa_mashamba" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('walongwa__mlezi_wa_mashamba')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Walongwa — mtoto wa Sengasu — alikuwa Mmbagha wa Mramba. Aliishi Mramba karibu na msitu wa Wambaga uitwao <strong style="color:var(--gold)">Mashankwe</strong>. Kazi yake maalum ilikuwa kubariki vyakula (<em>kuhoja</em> kwa Kipare) na utaalam wa kuondoa wadudu mashambani (<em>menda</em>). Ujuzi huu wa kilimo na kuhoji ulikuwa muhimu sana kwa jamii — ndiyo uliomfanya Chifu wa Usangi pia amthamini Walongwa na ndugu zake, akiweza kuwazawadia uchifu wa Usangi baada ya ushindi.</p>
+    </div>
+
+    <!-- ECONOMIC LANDSCAPE: Biashara ya Pare -->
+    <div class="history-section">
+      <p class="hs-label">Uchumi wa Kale wa Milima ya Pare</p>
+      <h2 class="hs-title">Wapare — Wauzaji Chuma wa Afrika Mashariki</h2>
+      <div class="hs-photo-admin" data-section="wapare__wauzaji_chuma_wa_afrik" style="display:none;margin:.5rem 0 1rem"><div id="hpg-wapare__wauzaji_chuma_wa_afrik" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('wapare__wauzaji_chuma_wa_afrik')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Kabla ya Wambaga kujiimarisha kisiasa, Milima ya Pare ilikuwa tayari kitovu cha uchumi wa Afrika Mashariki. Wapare walikuwa <strong style="color:var(--gold)">wazalishaji wakuu wa chuma kilichoyeyushwa</strong> — wakitoa vyombo vya kilimo na silaha kwa makabila jirani, ikiwa ni pamoja na Wachaga na Wamasai. Milima ya Pare ilikuwa kwenye njia kuu za biashara ya umbali mrefu zinazounganisha mambo ya ndani na pwani ya Bahari ya Hindi.</p>
+      <p class="hs-body" style="margin-top:1rem">Pale Wambaga walipowasili wakiwa na nguvu za kijeshi na ujuzi wa kuhoja (kuondoa wadudu) na kuomba mvua, waliingia katika mazingira ya uchumi wenye nguvu. Nguvu hizo mbili — <strong style="color:var(--gold)">ujuzi wa kijeshi na ujuzi wa kiroho/kilimo</strong> — ndizo zilizowafanya Wasangi wakiri uchifu wa Chachika. Ustadi wa mvua ulikuwa sawa na nguvu za kiuchumi katika jamii inayotegemea kilimo.</p>
+    </div>
+
+    <!-- KIBONDA ERA -->
+    <div class="history-section">
+      <p class="hs-label">Kipindi cha Giza — Karne ya 19</p>
+      <h2 class="hs-title">Kibonda — Wakati wa Msiba Mkubwa</h2>
+      <div class="hs-photo-admin" data-section="kibonda__wakati_wa_msiba_mkubw" style="display:none;margin:.5rem 0 1rem"><div id="hpg-kibonda__wakati_wa_msiba_mkubw" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('kibonda__wakati_wa_msiba_mkubw')">📷 Ongeza Picha</button></div>
+      <div style="border-left:3px solid rgba(180,60,40,0.6);padding:1rem 1.5rem;margin:1.5rem 0;background:rgba(80,20,10,0.15)">
+        <p style="font-style:italic;color:var(--cream2);font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.8"><strong style="color:#E87050">Kibonda</strong> — neno la Kipare linalomaanisha wakati wa msiba mkubwa, kifo kingi, na vurugu kali. Karne ya 19 ilikuwa kibonda kwa Wapare wote.</p>
+      </div>
+      <p class="hs-body">Katika kipindi hiki cha msukosuko, uchumi wa eneo ulibadilika sana. Nguvu ya kisiasa — iliyokuwa inategemea ujuzi wa kiroho kama mvua — ilianza kuhamia kwa nguvu ya silaha na biashara ya kimataifa. Chini ya uongozi wa Chifu <strong style="color:var(--gold)">Kengia</strong> (mtoto wa Chasimba), Wambaga waliingia katika biashara ya msafara ya Bonde la Pangani:</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.5rem 0">
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem">~1850–1880</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7">Kengia alileta mji wake upande wa mashariki wa plateau kufuatilia njia za biashara. Alianzisha <strong style="color:var(--gold)">soko la watumwa Usangi</strong> — watumwa waliokamatwa waliuzwa kwa wafanyabiashara wa Kiswahili na Kiarabu.</p>
+        </div>
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem">1870–1880</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7">Magonjwa makubwa ya kipindupindu na ndui yalipiga watu wengi Pare. Makabila ya Wamasai na Wachaga pia yalishambulia mara kwa mara.</p>
+        </div>
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem">1887–1892</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7">Ukame mkubwa ulisababisha njaa kali inayoitwa <strong style="color:var(--gold)">Mnyime</strong> — iliharibu kabisa mifumo ya kilimo na kusababisha vifo vingi sana.</p>
+        </div>
+      </div>
+      <p class="hs-body">Licha ya msiba huu, Wambaga walionyesha nguvu ya jamii: waliendelea kuimarisha miundomsingi, ikiwa ni pamoja na mifumo ya umwagiliaji na upanuzi wa Mireshe (mahandaki) — uhalisia unaothibitisha uwezo wa juu wa kazi ya pamoja hata katika nyakati ngumu.</p>
+    </div>
+
+    <!-- KILINDI DYNASTY CONNECTION -->
+    <div class="history-section">
+      <p class="hs-label">Uhusiano wa Kifalme</p>
+      <h2 class="hs-title">Wambaga na Nasaba ya Kilindi — Ufalme wa Shambaa</h2>
+      <div class="hs-photo-admin" data-section="wambaga_na_nasaba_ya_kilindi__" style="display:none;margin:.5rem 0 1rem"><div id="hpg-wambaga_na_nasaba_ya_kilindi__" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('wambaga_na_nasaba_ya_kilindi__')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Historia ya kuvutia ya Wambaga inaonyesha uhusiano wa kina na <strong style="color:var(--gold)">Nasaba ya Kilindi</strong> — familia ya kifalme iliyotawala Ufalme wa Shambaa (Milima ya Usambara) kwa zaidi ya karne mbili. Kulingana na historia ya mdomo ya Wambaga:</p>
+      <div style="background:rgba(201,146,42,0.04);border:1px solid rgba(201,146,42,0.12);padding:1.2rem 1.5rem;margin:1.5rem 0;border-radius:2px">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--cream2);line-height:2">
+          <span style="color:var(--gold)">Sengasu</span> (mzazi wa Wambaga wa Tanzania) 
+          → <span style="color:var(--gold)">Rindi</span> (aliyekaa Milima ya Nguu) 
+          → <span style="color:var(--gold)">Shebughe Mkilindi</span> 
+          → <span style="color:var(--gold)">Kimweri Mkilindi</span> (Lushoto) 
+          → <span style="color:var(--gold)">Mbegha wa Vuga</span> — <em>mfalme maarufu aliyeanzisha Ufalme wa Shambaa</em>
+          → <span style="color:var(--gold)">Simba Mwene</span> → <span style="color:var(--gold)">N. Rindi</span> → <span style="color:var(--gold)">Meli Mandara</span> &amp; <span style="color:var(--gold)">Kirota Moshi (1882)</span>
+        </p>
+      </div>
+      <p class="hs-body">Ushahidi wa kihistoria unaunga mkono uhusiano huu wa kina: Machifu wa Shambaa mara kwa mara <strong style="color:var(--gold)">waliwaajiri wataalamu wa mvua wa Wambaga kwa malipo makubwa</strong> kufanya ibada muhimu Milima ya Usambara. Kwa jamii zinazotegemea kilimo, nguvu ya kiroho ilikuwa sawa na nguvu ya kisiasa — kwa hivyo wasomi wa Wambaga walitamaniwa sana. Kubadilishana huku kwa ujuzi wa kiroho kunaweza kusababisha ndoa kati ya familia tawala, na hatimaye kuchanganywa kwa historia za mdomo.</p>
+    </div>
+
+    <!-- PARE NOMENCLATURE TABLE -->
+    <div class="history-section">
+      <p class="hs-label">Lugha ya Majina</p>
+      <h2 class="hs-title">Maana ya Majina ya Kipare — Historia Iliyofichwa katika Jina</h2>
+      <div class="hs-photo-admin" data-section="maana_ya_majina_ya_kipare__his" style="display:none;margin:.5rem 0 1rem"><div id="hpg-maana_ya_majina_ya_kipare__his" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('maana_ya_majina_ya_kipare__his')">📷 Ongeza Picha</button></div>
+      <p class="hs-body" style="margin-bottom:1.5rem">Kwa Wapare, jina si tu neno — ni <strong style="color:var(--gold)">kumbukumbu ya historia</strong>. Kila jina la jadi linaeleza hali ya kiuchumi, kijamii, au kimazingira iliyokuwepo wakati mtoto alizaliwa. Kujua maana ya jina ni kujua kipande cha historia ya familia:</p>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.3)">
+              <th style="padding:.6rem 1rem;text-align:left;color:var(--gold);font-family:'Cinzel',serif;font-weight:400;letter-spacing:.1em">Jina</th>
+              <th style="padding:.6rem 1rem;text-align:left;color:var(--gold);font-family:'Cinzel',serif;font-weight:400;letter-spacing:.1em">Jinsia</th>
+              <th style="padding:.6rem 1rem;text-align:left;color:var(--gold);font-family:'Cinzel',serif;font-weight:400;letter-spacing:.1em">Maana / Mazingira ya Kuzaliwa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nanzia</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Njiani" — mama alizaa akiwa safarini</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Namdawa / Kodawa</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Kwa dawa" — alizaliwa kwa msaada wa mganga wa jadi</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Ledaiwe / Tekiendwa</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Asiyetakiwa" — mama aliyezaa mabinti mengi huku baba akitaka mtoto wa kiume</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Namkeshe</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">Mtoto aliyelia sana au alizaliwa wakati wa ugomvi mkubwa</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Latoa</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Aliokotwa" — mimba ya mshangao au mtoto ambaye kuishi kwake haukutarajiwa</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Namshitu</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa wakati wa mshitu — ibada ya siri ya ukubalifu wa vijana kiume</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nakio / Nakija</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa usiku wa manane au gizani kabisa</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nambojo</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa wakati wa mavuno ya maharagwe/kunde</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nankondo / Senkondo</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀/♂</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa wakati wa vita, uvamizi, au kipindi cha kibonda</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nakiete / Sekiete</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀/♂</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa siku ya soko la eneo</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Beresha</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Dharau" — alizaliwa wakati wa kudhalilishwa kwa familia au jamii</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nyagahwa</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Lawama" — alizaliwa wakati wa migogoro na mashtaka ya familia</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nakimo</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa wakati wa kilimo kikubwa cha kilimo</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Nzota</td><td style="padding:.55rem 1rem;color:rgba(180,120,80,0.8)">♂</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Njaa" — alizaliwa wakati wa njaa kali (kama njaa ya Mnyime)</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Mashuve</td><td style="padding:.55rem 1rem;color:rgba(180,120,80,0.8)">♂</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Nyani" — nyani wengi walikuwa wakiharibu mashamba wakati wa kuzaliwa</td></tr>
+            <tr style="border-bottom:1px solid rgba(201,146,42,0.08)"><td style="padding:.55rem 1rem;color:var(--cream2)">Kakiva</td><td style="padding:.55rem 1rem;color:rgba(180,120,80,0.8)">♂</td><td style="padding:.55rem 1rem;color:var(--cream2)">"Maskini" — alizaliwa wakati wa umaskini mkubwa au msiba wa kiuchumi</td></tr>
+            <tr><td style="padding:.55rem 1rem;color:var(--cream2)">Charokiwa / Naroka</td><td style="padding:.55rem 1rem;color:rgba(201,146,42,0.6)">♂/♀</td><td style="padding:.55rem 1rem;color:var(--cream2)">Alizaliwa asubuhi na mapema — alfajiri</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hs-body" style="margin-top:1.2rem">Pamoja na ushawishi wa Ukristo (hasa kupitia wamisionari wa Kijerumani wa Shighatini), majina mapya yaliingia yakionyesha neema ya kimungu: <strong style="color:var(--gold)">Naghejwa</strong> (nimesaidiwa), <strong style="color:var(--gold)">Natujwa</strong> (nimepata amani), <strong style="color:var(--gold)">Nasikiwa</strong> (Mungu amenisikia), <strong style="color:var(--gold)">Nakijwa</strong> (nimeokolewa), <strong style="color:var(--gold)">Lukundo</strong> (upendo).</p>
+    </div>
+
+    <!-- ENDOGAMY: Ndoa za ndani ya ukoo -->
+    <div class="history-section">
+      <p class="hs-label">Uhusiano wa Kisiri</p>
+      <h2 class="hs-title">Ndoa za Ndani ya Ukoo — Viungo vya Matawi</h2>
+      <div class="hs-photo-admin" data-section="ndoa_za_ndani_ya_ukoo__viungo_" style="display:none;margin:.5rem 0 1rem"><div id="hpg-ndoa_za_ndani_ya_ukoo__viungo_" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('ndoa_za_ndani_ya_ukoo__viungo_')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Historia ya Wambaga inaonyesha mfumo wa ndoa za ndani ya ukoo (<em>endogamy</em>) ambao uliweka matawi tofauti ukiwa karibu. Ndoa hizi muhimu zinaonyesha jinsi matawi ya Mbaniko, Sengasu/Chachika yaliunganishwa:</p>
+      <div style="display:grid;gap:.8rem;margin:1.5rem 0">
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem 1.2rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem">Mbaniko ↔ Sengasu/Chachika</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7"><strong>Bi Nankumbi</strong> (binti wa Ghuhia Chachika, tawi la Sengasu) aliolewa na <strong>Kachenje Kanyembwe</strong> (tawi la Mbaniko/Tenameso). Yeye ndiye mama wa <strong>Aliamani Kachenje</strong> — mlezi mkubwa wa historia ya Wambaga!</p>
+        </div>
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem 1.2rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem">Mbaniko ↔ Sengasu/Chachika</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7"><strong>Bi Mvuni</strong> (binti wa Kadori Mshewa, tawi la Mbaniko/Tenameso) aliolewa na <strong>Ghuhia Chachika</strong> (tawi la Sengasu). Yeye ndiye mama wa <strong>Mfumwa Liana Ghuhia</strong> — chifu mkuu wa Usangi.</p>
+        </div>
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem 1.2rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem">Bangalala ↔ Sengasu/Chachika</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7"><strong>Bi Ezena</strong> (binti wa Kiagho Varisanga, tawi la Bangalala) aliolewa na <strong>Mfumwa Athumani Issa Liana</strong> (chifu mkuu wa Usangi, tawi la Sengasu/Chachika) — kuunganisha matawi mawili makubwa.</p>
+        </div>
+        <div style="background:rgba(201,146,42,0.05);border:1px solid rgba(201,146,42,0.15);padding:1rem 1.2rem;border-radius:2px">
+          <div style="color:var(--gold);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem">Mbaniko ↔ Sengasu/Chachika</div>
+          <p style="font-size:.85rem;color:var(--cream2);line-height:1.7"><strong>Bi Kitente Kanyempwe</strong> (tawi la Mbaniko/Tenameso) aliolewa na <strong>Kisenge Ghuhia</strong> (tawi la Sengasu/Chachika).</p>
+        </div>
+      </div>
+      <p class="hs-body">Ndoa hizi zilifanya Wambaga wa matawi tofauti kuwa ndugu wa karibu zaidi — na kusaidia kuhifadhi umoja wa kisiasa na kijamii ndani ya ukoo mkubwa.</p>
+    </div>
+
+    <!-- FAMILY LAW: Mila ya Ukoo -->
+    <div class="history-section">
+      <p class="hs-label">Sheria ya Kimila</p>
+      <h2 class="hs-title">Ukoo wa Baba — Mfumo wa Wapare</h2>
+      <div class="hs-photo-admin" data-section="ukoo_wa_baba__mfumo_wa_wapare" style="display:none;margin:.5rem 0 1rem"><div id="hpg-ukoo_wa_baba__mfumo_wa_wapare" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('ukoo_wa_baba__mfumo_wa_wapare')">📷 Ongeza Picha</button></div>
+      <p class="hs-body">Kwa mila za Kipare, mtoto akizaliwa ukoo wake ni ukoo wa baba. Hii ni tofauti na makabila kama Wanguu — ambapo mtoto akizaliwa anafuata ukoo wa mama. Kwa hiyo, mume akiwa ukoo mmoja, na mke wa ukoo mwingine, watoto wao ni wa ukoo wa baba peke yake.</p>
+      <p class="hs-body" style="margin-top:1rem">Kitabu cha historia kimeorodhesha uzao wa kiume peke yake — watoto wa kike wanaoolewa nje ya ukoo wanaenda ukoo wa mume wao. Lakini kwa sababu Wambaga wanaoleana ndani ya matawi ya ukoo, baadhi ya watoto wa kike walibaki kuorodheshwa katika kitabu. Mfumo huu unafanya mti wa familia kuwa wazi na rahisi kufuatilia — kila mtu anajua yeye ni wa kizazi cha ngapi kutoka kwa Bagha.</p>
+      <p class="hs-body" style="margin-top:1rem"><strong style="color:var(--gold)">Jinsi ya kujua uhusiano:</strong> Tazama vizazi viwili katika mti wa familia. Kama wewe ni Kizazi cha 10 na mtu mwingine ni Kizazi cha 10 pia — mnaitana kaka/dada. Wale wa kizazi cha 9 ni baba/shangazi zenu. Wale wa kizazi cha 8 ni babu/bibi zenu. Na wale wa kizazi cha 11 ni watoto wenu.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── PROVERBS VIEW ── -->
+
+<!-- ══ DAUDI LIANA / FAMILIA YA LIANA ══ -->
+<div class="view" id="view-daudi">
+<div style="padding:3rem 2rem;max-width:900px;margin:0 auto">
+
+  <div class="history-section">
+    <p class="hs-label">Tawi la Chachika · Ghuhia · Sengasu</p>
+    <h2 class="hs-title">Familia ya Mfumwa Liana — Nasaba ya Watawala wa Usangi</h2>
+      <div class="hs-photo-admin" data-section="familia_ya_mfumwa_liana__nasab" style="display:none;margin:.5rem 0 1rem"><div id="hpg-familia_ya_mfumwa_liana__nasab" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('familia_ya_mfumwa_liana__nasab')">📷 Ongeza Picha</button></div>
+    <p class="hs-body">Mfumwa Liana Ghuhia alikuwa Chifu wa Usangi katika karne ya 19–20, mzao wa moja kwa moja wa Chifu Chachika — shujaa aliyeshinda Vita vya Usangi ~1805. Uzao wake unaendelea kupitia matawi mengi: tawi la Mavura (uchifu), tawi la Mlao/Athumani (Chifu Mkuu 1985), na tawi la <strong style="color:var(--gold)">Daudi Liana</strong>. Ukurasa huu unaheshimu familia hii ya kihistoria.</p>
+  </div>
+
+  <!-- Mfumwa Liana profile -->
+  <div class="history-section">
+    <p class="hs-label">Baba wa Familia</p>
+    <h2 class="hs-title">Mfumwa Liana Ghuhia — Chifu wa Usangi</h2>
+      <div class="hs-photo-admin" data-section="mfumwa_liana_ghuhia__chifu_wa_" style="display:none;margin:.5rem 0 1rem"><div id="hpg-mfumwa_liana_ghuhia__chifu_wa_" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('mfumwa_liana_ghuhia__chifu_wa_')">📷 Ongeza Picha</button></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-bottom:1.2rem">
+      <div class="liana-card"><div class="liana-label">Nasaba</div><p class="liana-text">Mzao wa moja kwa moja wa Chifu Chachika. Kizazi cha 10 kutoka Bagha wa Asmara, Ethiopia ~1545.</p></div>
+      <div class="liana-card"><div class="liana-label">Mahali</div><p class="liana-text">Usangi Kighare — ardhi iliyotolewa kwa familia ya Chachika baada ya ushindi wa vita ~1805.</p></div>
+      <div class="liana-card"><div class="liana-label">Watoto</div><p class="liana-text">Zaidi ya watoto 30 — 16 wa kiume na 16 wa kike. Alikuwa na wake wengi kulingana na mila za Kipare.</p></div>
+      <div class="liana-card"><div class="liana-label">Urithi</div><p class="liana-text">Damu yake inaendelea kupitia Mavura (uchifu), Mlao/Athumani (Chifu Mkuu 1985), Daudi, na matawi mengine.</p></div>
+    </div>
+    <p class="hs-body">Mlolongo wa uchifu: <strong style="color:var(--gold)">Chachika</strong> (~1805) → <strong style="color:var(--gold)">Ghuhia</strong> → <strong style="color:var(--gold)">Mfumwa Liana</strong> (Chifu wa Usangi) → <strong style="color:var(--gold)">Mavura</strong> → <strong style="color:var(--gold)">Yusufu</strong> → <strong style="color:var(--gold)">Alhaji Issa Mlao</strong> (mwandishi 2020). Mstari wa pili: Mfumwa Liana → <strong style="color:var(--gold)">Issa/Mlao Liana</strong> → <strong style="color:var(--gold)">Mfumwa Athumani Issa Liana</strong> (Chifu Mkuu 1985).</p>
+  </div>
+
+  <!-- DAUDI LIANA MAIN -->
+  <div class="history-section">
+    <p class="hs-label">★ Kizazi cha 11 · Mwana wa Chifu</p>
+    <h2 class="hs-title">Daudi Liana — Mwana wa Mfumwa Liana</h2>
+      <div class="hs-photo-admin" data-section="daudi_liana__mwana_wa_mfumwa_l" style="display:none;margin:.5rem 0 1rem"><div id="hpg-daudi_liana__mwana_wa_mfumwa_l" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('daudi_liana__mwana_wa_mfumwa_l')">📷 Ongeza Picha</button></div>
+    <div style="border-left:3px solid var(--gold);padding:1rem 1.5rem;margin-bottom:1.4rem;background:rgba(201,146,42,0.04)">
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--cream2);line-height:1.85">Daudi Liana ni mwana wa Mfumwa Liana Ghuhia — chifu mkubwa wa Usangi. Alizaliwa katika nusu ya pili ya karne ya 19, huko Usangi Kighare, ndani ya familia iliyokuwa ikiongoza kabila la Wambaga. Kama mwana wa chifu, alikua akijua historia, mila, na siri za utawala wa ukoo wake.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-bottom:1.4rem">
+      <div class="liana-card" style="border-color:rgba(201,146,42,.3)">
+        <div class="liana-label">Tarehe ya Kuzaliwa (DOB)</div>
+        <p class="liana-text">Haijahifadhiwa rasmi. Inakadiriwa: <strong style="color:var(--gold-l)">~1860–1880</strong> kulingana na kizazi cha baba na watoto wake.</p>
+      </div>
+      <div class="liana-card" style="border-color:rgba(201,146,42,.3)">
+        <div class="liana-label">Tarehe ya Kufariki (DOD)</div>
+        <p class="liana-text">Haijahifadhiwa. Inakadiriwa kufariki <strong style="color:var(--gold-l)">mapema ya karne ya 20</strong>, wakati wa au baada ya utawala wa kikoloni.</p>
+      </div>
+      <div class="liana-card"><div class="liana-label">Mahali</div><p class="liana-text">Usangi Kighare, Milima ya Pare, Tanzania ya leo.</p></div>
+      <div class="liana-card"><div class="liana-label">Kizazi</div><p class="liana-text">Kizazi cha <strong>11</strong> kutoka Bagha. Kizazi cha 3 kutoka Chifu Chachika.</p></div>
+    </div>
+    <div style="background:rgba(30,15,0,0.4);border:1px solid rgba(201,146,42,.15);padding:1.1rem 1.3rem">
+      <div style="font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,146,42,.5);margin-bottom:.5rem">Habari Zinazosubiri Kukamilishwa</div>
+      <p style="font-size:.82rem;color:var(--cream3);line-height:1.7">Tarehe sahihi, majina ya wake, na orodha kamili ya watoto wa Daudi Liana hazijahifadhiwa katika vyanzo vilivyopo. Familia inahimizwa kuchangia habari hizi. Kila habari ndogo ni hazina kwa vizazi vijavyo.</p>
+      <button class="btn btn-g btn-sm" style="margin-top:.9rem" onclick="isLoggedIn()?searchAndOpenEdit('Daudi Liana'):openAuth()">✏️ Ongeza Habari za Daudi Liana</button>
+    </div>
+  </div>
+
+  <!-- Ndugu -->
+  <div class="history-section">
+    <p class="hs-label">Familia ya Karibu</p>
+    <h2 class="hs-title">Ndugu za Daudi Liana</h2>
+      <div class="hs-photo-admin" data-section="ndugu_za_daudi_liana" style="display:none;margin:.5rem 0 1rem"><div id="hpg-ndugu_za_daudi_liana" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('ndugu_za_daudi_liana')">📷 Ongeza Picha</button></div>
+    <div class="sib-card"><div class="sib-name">Mavura Liana <span class="sib-role">— Chifu Aliyemfuata Baba</span></div><p class="sib-desc">Ndugu mkubwa aliyemrithi Mfumwa Liana kama Chifu wa Usangi. Mwanaye Yusufu Mavura ni baba wa Alhaji Issa Mlao (mwandishi wa historia ya Wambaga 2020).</p></div>
+    <div class="sib-card"><div class="sib-name">Issa / Mlao Liana <span class="sib-role">— Baba wa Chifu Mkuu</span></div><p class="sib-desc">Mwanaye <strong style="color:var(--gold)">Mfumwa Athumani Issa Liana</strong> alitawazwa Chifu Mkuu wa Wambaga wote wa Usangi mwaka 1985. Alioa Bi Ezena (tawi la Bangalala) — kuunganisha matawi mawili makubwa.</p></div>
+    <div class="sib-card"><div class="sib-name">Mwalimu Leonard Liana <span class="sib-role">— Mwalimu</span></div><p class="sib-desc">Mmoja wa wa kwanza wa familia kupata elimu ya kisasa. Jina "Mwalimu" linaonyesha heshima ya jamii kwake.</p></div>
+    <div class="sib-card"><div class="sib-name">Mashinde, Mwedadi, Hemedi, Hasani, Ramadhani, Mapande, Kivaria Liana</div><p class="sib-desc">Ndugu wengine — watoto wote wa Mfumwa Liana Ghuhia. Historia ya kila mmoja wao inangoja kukusanywa na kuhifadhiwa.</p></div>
+  </div>
+
+  <!-- Athumani -->
+  <div class="history-section">
+    <p class="hs-label">Urithi wa Uchifu · Binamu wa Daudi</p>
+    <h2 class="hs-title">Mfumwa Athumani Issa Liana — Chifu Mkuu 1985</h2>
+      <div class="hs-photo-admin" data-section="mfumwa_athumani_issa_liana__ch" style="display:none;margin:.5rem 0 1rem"><div id="hpg-mfumwa_athumani_issa_liana__ch" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem"></div><button class="btn btn-o btn-sm" onclick="uploadHistoriaPhoto('mfumwa_athumani_issa_liana__ch')">📷 Ongeza Picha</button></div>
+    <p class="hs-body">Mwaka 1985, <strong style="color:var(--gold)">Mfumwa Athumani Issa Liana</strong> alitawazwa rasmi kama Chifu Mkuu wa Wambaga wote wa Usangi kwa njia ya mila za asili za Kipare. Ni mjukuu wa Mfumwa Liana Ghuhia — na hivyo ni binamu wa karibu wa Daudi Liana. Mke wake ni <strong style="color:var(--gold)">Bi Ezena</strong>, binti ya Kiagho Varisanga wa tawi la Bangalala — ndoa iliyounganisha matawi mawili makubwa ya Wambaga.</p>
+  </div>
+
+  <div style="text-align:center;padding:1.5rem;background:rgba(201,146,42,.04);border:1px solid rgba(201,146,42,.12)">
+    <p class="hs-body" style="margin-bottom:1rem">Una habari kuhusu Daudi Liana? Tarehe, watoto, picha, hadithi? Kila habari ni hazina.</p>
+    <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-g btn-sm" onclick="isLoggedIn()?openAddModal():openAuth()">➕ Ongeza Mwanaukoo Mpya</button>
+      <button class="btn btn-o btn-sm" onclick="showView('tree')">🌳 Angalia Mti wa Familia</button>
+    </div>
+  </div>
+
+</div>
+</div><!-- end view-daudi -->
+
+<div class="view" id="view-proverbs">
+  <div style="padding:3rem 2rem;max-width:860px;margin:0 auto">
+    <p class="hs-label">Hekima ya Wapare</p>
+    <h2 class="hs-title" style="font-family:'Cinzel',serif;font-size:1.8rem;color:var(--cream);font-weight:400;margin-bottom:2rem">Misemo ya Wapare</h2>
+    <div id="proverbs-container"></div>
+  </div>
+</div>
+
+<!-- ── GALLERY VIEW ── -->
+<div class="view" id="view-gallery">
+
+    <!-- Header + Compose together at top -->
+    <div style="margin-bottom:1rem;max-width:600px;margin-left:auto;margin-right:auto">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <div style="width:34px;height:34px;border-radius:50%;background:rgba(201,146,42,.12);border:1px solid rgba(201,146,42,.3);display:flex;align-items:center;justify-content:center;font-size:1rem">💬</div>
+        <div>
+          <div style="font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold)">Family Lounge</div>
+          <div style="font-size:.62rem;color:var(--cream3)">Ukoo wa Wambaga</div>
+        </div>
+        <span id="lounge-dot" style="display:none;width:8px;height:8px;background:#4a9eff;border-radius:50%;margin-left:auto"></span>
+      </div>
+
+      <!-- Compose box - right below header -->
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:.75rem">
+        <div id="compose-photo-preview" style="display:none;padding:.2rem .25rem .4rem;font-size:.75rem;color:var(--gold);align-items:center;gap:.5rem">
+          <span id="compose-photo-name"></span>
+          <span onclick="clearComposePhoto()" style="cursor:pointer;color:var(--cream3);margin-left:.5rem">✕</span>
+        </div>
+        <textarea id="compose-input" placeholder="Andika ujumbe kwa familia... (@WambagaBot kumuuliza bot)" autocomplete="off" rows="3"
+          style="width:100%;background:transparent;border:none;color:var(--cream);font-size:.95rem;resize:none;box-sizing:border-box;line-height:1.6;outline:none;font-family:inherit"
+          oninput="handleMentionInput(this,'compose-mention-dropdown')"
+          onkeydown="if(event.key==='Enter'&&event.ctrlKey){event.preventDefault();sendComposePost()}"></textarea>
+        <div id="compose-mention-dropdown" style="display:none;position:relative;background:var(--panel2);border:1px solid var(--border);border-radius:8px;max-height:140px;overflow-y:auto;z-index:200;margin-bottom:.4rem"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:.4rem;padding-top:.5rem;border-top:1px solid var(--border)">
+          <button onclick="pickComposePhoto()" style="background:none;border:none;color:var(--cream3);cursor:pointer;font-size:1rem;padding:.25rem .4rem;border-radius:6px;display:flex;align-items:center;gap:.3rem;font-size:.82rem" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--cream3)'">📷 Picha</button>
+          <button onclick="sendComposePost()" style="background:var(--gold);color:#fff;border:none;border-radius:20px;padding:.35rem 1.1rem;font-size:.82rem;font-weight:700;cursor:pointer">Tuma ➤</button>
+        </div>
+        <input type="file" id="compose-photo-input" accept="image/*" style="display:none" onchange="handleComposePhoto(this)">
+      </div>
+    </div>
+
+    <!-- Posts feed -->
+    <div id="lounge-feed" style="max-width:600px;width:100%;margin:0 auto;padding-bottom:5rem">
+      <div id="lounge-empty" style="text-align:center;padding:3rem 1rem;color:var(--cream3);font-family:'Cormorant Garamond',serif;font-style:italic">
+        Bado hakuna posts — andika wa kwanza!
+      </div>
+    </div>
+
+</div>
+
+<!-- NEW POST MODAL -->
+<div class="auth-overlay" id="post-overlay" style="z-index:10001;align-items:flex-end">
+  <div class="auth-box" style="max-width:100%;width:100%;max-height:90vh;overflow-y:auto;border-radius:16px 16px 0 0;margin:0;padding:1.5rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1rem">Andika Post</div>
+      <button onclick="closeNewPost()" style="background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
+    </div>
+    <div style="position:relative">
+      <textarea id="post-content" autocomplete="off" placeholder="Andika hapa... tumia @WambagaBot kumuuliza bot" style="width:100%;min-height:100px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:.75rem;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:1rem;resize:vertical;box-sizing:border-box" oninput="handleMentionInput(this,'post-mention-dropdown')"></textarea>
+      <div id="post-mention-dropdown" style="display:none;position:absolute;bottom:100%;left:0;right:0;background:var(--panel);border:1px solid var(--border);border-radius:8px;max-height:150px;overflow-y:auto;z-index:100"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem;margin-top:.75rem;flex-wrap:wrap">
+
+      <button class="btn btn-o btn-sm" onclick="pickPostPhoto()">📷 Picha</button>
+      <div id="post-photo-preview" style="font-size:.75rem;color:var(--gold)"></div>
+      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="submitPost()">Chapisha</button>
+    </div>
+    <input type="file" id="post-photo-input" accept="image/*" style="display:none" onchange="handlePostPhoto(this)">
+  </div>
+</div>
+
+<!-- COMMENT MODAL -->
+<div class="auth-overlay" id="comment-overlay" style="z-index:10001;align-items:flex-end">
+  <div class="auth-box" style="max-width:100%;width:100%;max-height:85vh;overflow-y:auto;border-radius:16px 16px 0 0;margin:0;padding:1.5rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:1rem">💬 Maoni</div>
+      <button onclick="closeComments()" style="background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
+    </div>
+    <div id="comments-list" style="max-height:50vh;overflow-y:auto;margin-bottom:1rem"></div>
+    <div style="display:flex;gap:.5rem;align-items:flex-end">
+      <div style="flex:1;position:relative">
+      <input type="text" id="comment-input" autocomplete="off" placeholder="Andika... (@WambagaBot kumuuliza bot)" style="width:100%;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-size:.9rem;box-sizing:border-box" oninput="handleMentionInput(this,'comment-mention-dropdown')">
+      <div id="comment-mention-dropdown" style="display:none;position:absolute;bottom:100%;left:0;right:0;background:var(--panel);border:1px solid var(--border);border-radius:8px;max-height:150px;overflow-y:auto;z-index:100"></div>
+    </div>
+      <button class="btn btn-g btn-sm" onclick="submitComment()">Tuma</button>
+    </div>
+    <div id="comment-reply-to" style="display:none;font-size:.75rem;color:var(--gold);margin-top:.4rem;padding:.3rem .5rem;background:rgba(201,146,42,.1);border-radius:4px"></div>
+  </div>
+</div>
+
+<!-- REACTIONS MODAL -->
+<div class="auth-overlay" id="reactions-overlay" style="z-index:10001;align-items:flex-end">
+  <div class="auth-box" style="max-width:100%;width:100%;border-radius:16px 16px 0 0;margin:0;padding:1.5rem;text-align:center">
+    <div style="font-size:.8rem;color:var(--cream3);margin-bottom:1rem">Chagua Mwitikio</div>
+    <div style="display:flex;justify-content:center;gap:1.5rem;font-size:2rem">
+      <button onclick="submitReaction('upendo')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem"><span>❤️</span><span style="font-size:.65rem;color:var(--cream3)">Upendo</span></button>
+      <button onclick="submitReaction('amina')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem"><span>🙏</span><span style="font-size:.65rem;color:var(--cream3)">Amina</span></button>
+      <button onclick="submitReaction('safi')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem"><span>👏</span><span style="font-size:.65rem;color:var(--cream3)">Safi</span></button>
+      <button onclick="submitReaction('kicheko')" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.25rem"><span>😂</span><span style="font-size:.65rem;color:var(--cream3)">Kicheko</span></button>
+    </div>
+    <button class="btn btn-o btn-sm" style="margin-top:1.2rem" onclick="closeReactions()">Funga</button>
+  </div>
+</div>
+
+<!-- CONNECTION ENGINE MODAL -->
+<div class="auth-overlay" id="connection-overlay" style="z-index:10002">
+  <div class="auth-box" style="max-width:500px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div style="font-family:'Cinzel',serif;color:var(--gold)">🔗 Uhusiano Wenu</div>
+      <button onclick="closeConnection()" style="background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
+    </div>
+    <div id="connection-content" style="font-family:'Cormorant Garamond',serif;font-size:1rem;line-height:1.8;color:var(--cream)"></div>
+  </div>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<div id="mob-bottom-nav">
+  <button class="mob-bottom-item" id="mbn-home" onclick="showView('home')">
+    <span class="mob-bottom-icon">🏠</span><span>Nyumbani</span>
+  </button>
+  <button class="mob-bottom-item" id="mbn-tree" onclick="showView('tree')">
+    <span class="mob-bottom-icon">🌳</span><span>Mti</span>
+  </button>
+  <button class="mob-bottom-item" id="mbn-gallery" onclick="showView('gallery')">
+    <span class="mob-bottom-icon">💬</span><span>Lounge</span>
+    <span class="mob-bottom-dot" id="mbn-lounge-dot"></span>
+  </button>
+  <button class="mob-bottom-item" id="mbn-history" onclick="showView('history')">
+    <span class="mob-bottom-icon">📖</span><span>Historia</span>
+  </button>
+  <button class="mob-bottom-item" id="mbn-menu" onclick="openMobDrawer()">
+    <span class="mob-bottom-icon">☰</span><span>Zaidi</span>
+  </button>
+</div>
+
+<!-- AI FAB -->
+<button class="ai-fab" id="ai-fab" onclick="toggleAiDrawer()" title="Muulize WambagaBot">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="rgba(201,146,42,0.15)" stroke="#c9922a" stroke-width="1.5"/>
+    <circle cx="9" cy="10" r="1.2" fill="#c9922a"/>
+    <circle cx="15" cy="10" r="1.2" fill="#c9922a"/>
+    <path d="M8.5 14.5c1 1.5 5.5 1.5 7 0" stroke="#c9922a" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M12 2v-2M8 1l1 2M16 1l-1 2" stroke="#c9922a" stroke-width="1.2" stroke-linecap="round"/>
+    <rect x="10.5" y="-1" width="3" height="2" rx="1" fill="#c9922a"/>
+  </svg>
+</button>
+
+<!-- AI DRAWER -->
+<div class="ai-drawer" id="ai-drawer">
+  <div class="ai-drawer-header">
+    <div style="width:36px;height:36px;border-radius:50%;background:var(--panel2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3C7 3 3 7 3 12s4 9 9 9 9-4 9-9-4-9-9-9z" fill="rgba(201,146,42,0.15)" stroke="#c9922a" stroke-width="1.5"/><circle cx="9" cy="10.5" r="1.2" fill="#c9922a"/><circle cx="15" cy="10.5" r="1.2" fill="#c9922a"/><path d="M8.5 14.5c1 1.5 5.5 1.5 7 0" stroke="#c9922a" stroke-width="1.5" stroke-linecap="round"/></svg>
+</div>
+    <div>
+      <div style="font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold)">WambagaBot</div>
+      <div style="font-size:.68rem;color:var(--cream3)">Muulize kuhusu historia ya Wambaga</div>
+    </div>
+    <button onclick="toggleAiDrawer()" style="margin-left:auto;background:none;border:none;color:var(--cream3);font-size:1.2rem;cursor:pointer">✕</button>
+  </div>
+  <div class="ai-messages" id="ai-messages">
+    <div class="ai-msg bot">Habari! Mimi ni WambagaBot — msaidizi wa historia ya Ukoo wa Wambaga. Unaweza kuniuliza kuhusu mababu, historia, na nasaba ya familia. Niulize chochote! 🌳</div>
+  </div>
+  <div class="ai-input-area">
+    <input type="text" id="ai-input" autocomplete="new-password" name="ai-chat-input" placeholder="Uliza swali kuhusu historia ya Wambaga..." style="flex:1;background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-size:.88rem" onkeydown="if(event.key==='Enter')sendAiMessage()">
+    <button class="btn btn-g btn-sm" onclick="sendAiMessage()">➤</button>
+  </div>
+</div>
+</div><!-- end #app -->
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detail-panel">
+  <div class="dp-header">
+    <div style="display:flex;gap:1rem;align-items:flex-start;flex:1">
+      <div class="dp-avatar" id="dp-avatar" title="Bonyeza kubadilisha picha ya wasifu" onclick="changeProfilePhoto(window._lastOpenedPersonId)">👤</div>
+      <div>
+        <div class="dp-name" id="dp-name">-</div>
+        <div class="dp-gen" id="dp-gen">-</div>
+        <div class="dp-branch" id="dp-branch">-</div>
+<div id="dp-action-btns"></div>
+      </div>
+    </div>
+    <button class="dp-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="dp-body" id="dp-body"></div>
+</div>
+
+
+<!-- AUTH BAR -->
+<div class="auth-bar">
+  <button class="auth-btn" id="auth-btn" onclick="openAuth()">🔐 Ingia</button>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="auth-overlay">
+  <div class="auth-box" style="max-width:400px">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:2rem;margin-bottom:.5rem">🌳</div>
+      <div class="auth-title" id="auth-title">Karibu — Ukoo wa Wambaga</div>
+      <div class="auth-sub" id="auth-sub">Ingia au unda akaunti yako</div>
+    </div>
+    <div id="auth-error" class="auth-error"></div>
+    <div class="auth-field">
+      <label>Barua Pepe</label>
+      <input type="email" id="auth-email" placeholder="jina@email.com" autocomplete="email" onkeydown="if(event.key==='Enter')document.getElementById('auth-password').focus()">
+    </div>
+    <div class="auth-field" id="auth-name-field" style="display:none">
+      <label>Jina Lako</label>
+      <input type="text" id="auth-name" placeholder="Jina na ukoo wako">
+    </div>
+    <div class="auth-field">
+      <label>Nywila</label>
+      <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')submitAuth()">
+    </div>
+    <button class="btn btn-g" style="width:100%;margin-top:.75rem;padding:.75rem" id="auth-submit-btn" onclick="submitAuth()">Ingia</button>
+    <div style="text-align:center;margin-top:.75rem;font-size:.78rem;color:var(--cream3)" id="auth-switch">
+      Sina akaunti? <a onclick="toggleAuthMode()" style="color:var(--gold);cursor:pointer">Jiunge hapa</a>
+    </div>
+  </div>
+</div>
+
+<!-- CLAIM YOUR LEAF MODAL -->
+<div class="auth-overlay" id="claim-overlay" style="z-index:10001">
+  <div class="auth-box" style="max-width:500px">
+    <div style="text-align:center;margin-bottom:1.2rem">
+      <div style="font-size:2rem">🍃</div>
+      <div class="auth-title">Jiunge na Mti wa Familia</div>
+      <div class="auth-sub">Tafuta jina lako katika mti au chagua jina la kutumia</div>
+    </div>
+    <div id="claim-error" class="auth-error"></div>
+    <div class="auth-field">
+      <label>Jina lako la kutumia kwenye app *</label>
+      <input type="text" id="claim-username" autocomplete="off" placeholder="mf. rajabu_sekro" oninput="this.value=this.value.replace(/[^a-z0-9_]/gi,'_').toLowerCase()">
+    </div>
+    <div class="auth-field">
+      <label>Tafuta jina lako kwenye mti (hiari)</label>
+      <input type="text" id="claim-search" autocomplete="off" placeholder="Andika jina lako..." oninput="claimSearch(this.value)">
+    </div>
+    <div id="claim-results" style="max-height:180px;overflow-y:auto;margin-bottom:.5rem"></div>
+    <!-- Suggestions: Gen 14-15 grouped by branch -->
+    <div id="claim-suggestions" style="margin-bottom:1rem">
+      <div style="font-size:.72rem;color:var(--cream3);margin-bottom:.4rem;letter-spacing:.06em">WATU WA KIZAZI CHA SASA (Gen 14-15) — Chagua tawi lako:</div>
+      <div id="claim-branch-tabs" style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.5rem"></div>
+      <div id="claim-branch-people" style="max-height:200px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:.25rem"></div>
+    </div>
+    <div id="claim-selected" style="display:none;padding:.6rem 1rem;background:rgba(201,146,42,.1);border:1px solid var(--gold);border-radius:6px;margin-bottom:1rem;font-size:.85rem;color:var(--cream)"></div>
+    <div style="display:flex;gap:.75rem">
+      <button class="btn btn-o" style="flex:1" onclick="claimSkip()">Endelea Bila Kutafuta</button>
+      <button class="btn btn-g" style="flex:1" id="claim-submit-btn" onclick="submitClaim()">Thibitisha</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PERSON MODAL -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal-box">
+    <div class="modal-title">➕ Ongeza Mwanaukoo</div>
+    <div class="modal-sub">Mtu mpya ataongezwa mti wa familia kwa wote kuona</div>
+    <div class="modal-field">
+      <label>Jina Kamili *</label>
+      <input type="text" id="add-name" placeholder="mf. Juma Hassan Sengasu">
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Kizazi (Gen) *</label>
+        <input type="number" id="add-gen" min="1" max="20" placeholder="mf. 12">
+      </div>
+      <div class="modal-field">
+        <label>Jinsia</label>
+        <select id="add-gender">
+          <option value="male">Mwanaume</option>
+          <option value="female">Mwanamke (Bi)</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Mzazi (Baba/Mama) *</label>
+      <input type="text" id="add-parent-search" placeholder="Andika jina la mzazi..." oninput="searchParentSuggestions(this.value)">
+      <div id="parent-suggestions" style="border:1px solid var(--border);max-height:140px;overflow-y:auto;display:none;margin-top:2px"></div>
+      <input type="hidden" id="add-parent-id">
+    </div>
+    <div class="modal-field">
+      <label>Tawi la Familia</label>
+      <select id="add-branch">
+        <option value="Wambaga wote">Wambaga wote</option>
+        <option value="Tawi la Mpombeyagonja">Mpombeyagonja</option>
+        <option value="Tawi la Mbaniko">Mbaniko</option>
+        <option value="Tawi la Tenameso">Tenameso</option>
+        <option value="Tawi la Kinenekejo">Kinenekejo</option>
+        <option value="Tawi la Chikira">Chikira Kalighi</option>
+        <option value="Tawi la Bangalala">Bangalala</option>
+        <option value="★ Tawi la Chachika">Chachika</option>
+        <option value="Tawi la Chasimba">Chasimba</option>
+        <option value="Tawi la Sengasu">Sengasu</option>
+        <option value="Tawi la Luvigho">Luvigho</option>
+        <option value="Tawi la Chalambo">Chalambo</option>
+      </select>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Mwaka Kuzaliwa</label>
+        <input type="text" id="add-born" placeholder="mf. 1985">
+      </div>
+      <div class="modal-field">
+        <label>Mahali</label>
+        <input type="text" id="add-location" placeholder="mf. Usangi">
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Mke/Mume (Spouse)</label>
+      <input type="text" id="add-spouse" placeholder="mf. Fatuma binti Hassan">
+    </div>
+    <div class="modal-field">
+      <label>Maelezo / Habari</label>
+      <textarea id="add-note" placeholder="Habari yoyote muhimu kuhusu mtu huyu..."></textarea>
+    </div>
+    <div id="add-error" class="auth-error"></div>
+    <div class="modal-actions">
+      <button class="btn btn-o btn-sm" onclick="closeAddModal()">Funga</button>
+      <button class="btn btn-g btn-sm" id="add-submit-btn" onclick="submitAddPerson()">💾 Hifadhi</button>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fab" onclick="openAddModal()" title="Ongeza Mwanaukoo">+</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- External scripts: data first, then app logic -->
+<script src="data.js?v=1784635331"></script>
+<script src="app.js?v=1784635331"></script>
+<!-- EDIT PERSON MODAL -->
+<div class="edit-overlay" id="edit-overlay" onclick="if(event.target===this)closeEditModal()">
+  <div class="edit-box">
+    <div class="edit-title">✏️ Hariri Maelezo — <span id="edit-modal-name"></span></div>
+    <input type="hidden" id="edit-person-id">
+    <div class="edit-field"><label class="edit-lbl">Tarehe ya Kuzaliwa (DOB)</label><input class="edit-inp" id="edit-born" placeholder="Mfano: 1920 au 15 Machi 1920"></div>
+    <div class="edit-field"><label class="edit-lbl">Tarehe ya Kufariki (DOD)</label><input class="edit-inp" id="edit-died" placeholder="Mfano: 1995 au 3 Januari 1995"></div>
+    <div class="edit-field"><label class="edit-lbl">Mahali (Makazi / Kuzaliwa)</label><input class="edit-inp" id="edit-location" placeholder="Mfano: Usangi, Moshi, Dar es Salaam"></div>
+    <div class="edit-field"><label class="edit-lbl">Mke / Mume</label><input class="edit-inp" id="edit-spouse" placeholder="Mfano: Fatuma binti Ali"></div>
+    <div class="edit-field"><label class="edit-lbl">Maelezo / Hadithi</label><textarea class="edit-inp edit-textarea" id="edit-note" placeholder="Andika habari yoyote unayojua kuhusu mtu huyu..."></textarea></div>
+    <div class="edit-actions">
+      <button class="btn btn-o btn-sm" onclick="closeEditModal()">Funga</button>
+      <button class="btn btn-g btn-sm" id="edit-submit-btn" onclick="submitEditPerson()">💾 Hifadhi</button>
+    </div>
+  </div>
+</div>
+
+<!-- PWA Install Prompt -->
+<div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:800;
+  background:rgba(255,255,255,0.97);border-top:1px solid rgba(201,146,42,0.4);
+  padding:1rem 1.2rem;display:none;align-items:center;gap:1rem;flex-wrap:wrap">
+  <div style="flex:1;min-width:180px">
+    <div style="font-family:'Cinzel',serif;font-size:.82rem;color:var(--gold);letter-spacing:.06em">📲 Weka App Yako</div>
+    <div style="font-size:.72rem;color:var(--cream3);margin-top:.2rem">Weka Ukoo wa Wambaga kwenye simu yako kama app</div>
+  </div>
+  <div style="display:flex;gap:.6rem;flex-shrink:0">
+    <button onclick="installPWA()" style="font-family:'Raleway',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.1rem;background:var(--gold);color:#fff;border:none;cursor:pointer">WEKA APP</button>
+    <button onclick="document.getElementById('pwa-banner').style.display='none'" style="font-family:'Raleway',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.5rem .8rem;background:none;color:var(--cream3);border:1px solid var(--border);cursor:pointer">Baadaye</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// PWA INSTALL
+// ══════════════════════════════════════════
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Don't show if already installed or dismissed recently
+  const dismissed = localStorage.getItem('pwa_dismissed');
+  const installed = localStorage.getItem('pwa_installed');
+  if(installed || (dismissed && Date.now() - parseInt(dismissed) < 7*24*60*60*1000)) return;
+  // Check if running as standalone (already installed)
+  if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) return;
+  setTimeout(() => {
+    const banner = document.getElementById('pwa-banner');
+    if(banner) banner.style.display = 'flex';
+  }, 4000);
+});
+
+function installPWA() {
+  const banner = document.getElementById('pwa-banner');
+  if(banner) banner.style.display = 'none';
+  if(deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(result => {
+      if(result.outcome === 'accepted') {
+        localStorage.setItem('pwa_installed', '1');
+        showToast('✅ App imewekwa! Angalia screen yako ya nyumbani.');
+      } else {
+        localStorage.setItem('pwa_dismissed', Date.now().toString());
+      }
+      deferredPrompt = null;
+    });
+  }
+}
+
+window.addEventListener('appinstalled', () => {
+  localStorage.setItem('pwa_installed', '1');
+  const banner = document.getElementById('pwa-banner');
+  if(banner) banner.style.display = 'none';
+  deferredPrompt = null;
+});
+
+// Also hide banner if already running as standalone
+if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){
+  localStorage.setItem('pwa_installed', '1');
+}
+</script>
+
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   FEATURES v2 — Mtu wa Leo · Scroll-top · Search shortcut · Stats
+   All additive & guarded: failures here never break the app.
+   ═══════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
+
+  /* ── 1. MTU WA LEO — deterministic daily featured person ── */
+  function initMtuWaLeo(){
+    try{
+      if(typeof PEOPLE === 'undefined' || typeof openPanel !== 'function') return;
+      var ids = Object.keys(PEOPLE).filter(function(id){
+        var p = PEOPLE[id];
+        return p && p.name && !p.isUnknown && p.name.indexOf('?') === -1;
+      });
+      if(!ids.length) return;
+      // Seed by date so everyone sees the same person all day
+      var d = new Date();
+      var seed = d.getFullYear()*372 + (d.getMonth()+1)*31 + d.getDate();
+      var pick = PEOPLE[ids[seed % ids.length]];
+      if(!pick) return;
+
+      var hero = document.querySelector('.hero');
+      var btns = document.querySelector('.hero-btns');
+      if(!hero || !btns || document.getElementById('mwl-card')) return;
+
+      var shortName = pick.name.split('/')[0].trim();
+      var av = pick.profile_photo
+        ? '<img src="'+pick.profile_photo+'" style="width:100%;height:100%;object-fit:cover" alt="">'
+        : (pick.isFemale ? '👩' : '👤');
+
+      var card = document.createElement('button');
+      card.id = 'mwl-card';
+      card.className = 'mwl-card';
+      card.setAttribute('aria-label','Mtu wa Leo: '+shortName);
+      card.innerHTML =
+        '<span class="mwl-avatar">'+av+'</span>'+
+        '<span><span class="mwl-eyebrow">✦ Mtu wa Leo</span>'+
+        '<span class="mwl-name" style="display:block">'+shortName+'</span>'+
+        '<span class="mwl-meta">Kizazi '+pick.gen+(pick.branch?' · '+pick.branch.replace('★','').trim():'')+'</span></span>'+
+        '<span class="mwl-arrow">→</span>';
+      card.onclick = function(){ try{ openPanel(pick.id); }catch(e){} };
+      hero.insertBefore(card, btns);
+    }catch(e){ /* silent */ }
+  }
+
+  /* ── 2. LIVE HERO STATS from actual data ── */
+  function refreshHeroStats(){
+    try{
+      if(typeof PEOPLE === 'undefined') return;
+      var ids = Object.keys(PEOPLE);
+      if(!ids.length) return;
+      var maxGen = 0;
+      ids.forEach(function(id){ var g = PEOPLE[id].gen||0; if(g>maxGen) maxGen=g; });
+      var el = document.getElementById('stat-people');
+      if(el) el.textContent = ids.length.toLocaleString('en-US');
+      // Update vizazi stat (3rd stat) if present
+      var stats = document.querySelectorAll('.hero-stats .stat-n');
+      if(stats[2] && maxGen>0) stats[2].textContent = maxGen;
+    }catch(e){}
+  }
+
+  /* ── 3. SCROLL TO TOP ── */
+  function initScrollTop(){
+    try{
+      if(document.getElementById('scroll-top-btn')) return;
+      var b = document.createElement('button');
+      b.id = 'scroll-top-btn';
+      b.title = 'Rudi juu';
+      b.setAttribute('aria-label','Rudi juu');
+      b.textContent = '↑';
+      b.onclick = function(){ window.scrollTo({top:0,behavior:'smooth'}); };
+      document.body.appendChild(b);
+      var ticking = false;
+      window.addEventListener('scroll', function(){
+        if(ticking) return; ticking = true;
+        requestAnimationFrame(function(){
+          b.style.display = window.scrollY > 500 ? 'flex' : 'none';
+          ticking = false;
+        });
+      }, {passive:true});
+    }catch(e){}
+  }
+
+  /* ── 4. "/" focuses search (desktop) ── */
+  function initSearchShortcut(){
+    try{
+      document.addEventListener('keydown', function(e){
+        if(e.key !== '/' ) return;
+        var t = e.target;
+        if(t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.isContentEditable)) return;
+        var inp = document.getElementById('search-input');
+        if(inp && inp.offsetParent !== null){ e.preventDefault(); inp.focus(); }
+      });
+    }catch(e){}
+  }
+
+  /* Boot: wait for app data, retry gently */
+  function boot(){
+    initScrollTop();
+    initSearchShortcut();
+    var tries = 0;
+    var t = setInterval(function(){
+      tries++;
+      if(typeof PEOPLE !== 'undefined' && Object.keys(PEOPLE).length > 100){
+        clearInterval(t);
+        initMtuWaLeo();
+        refreshHeroStats();
+        // Refresh stats again after cloud data merges
+        setTimeout(refreshHeroStats, 6000);
+      }
+      if(tries > 40) clearInterval(t);
+    }, 250);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot);
+  } else { boot(); }
+})();
+</script>
+
+</body>
+</html>
